@@ -10,7 +10,12 @@ List<BottomNavigationBarItem> generateBottomNavItems(
   return iconMap.entries
       .map((entry) => BottomNavigationBarItem(
     icon: Icon(entry.key, color: Colors.grey),
-    activeIcon: Icon(entry.key, color: AppColors.greenColor),
+    activeIcon: Container(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+        decoration: BoxDecoration(
+            color: AppColors.transparentGreenColor,
+            borderRadius: BorderRadius.circular(10)),
+        child: Icon(entry.key, color: AppColors.greenColor)),
     backgroundColor: Colors.white,
     label: entry.value,
   )

@@ -21,25 +21,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: taps[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 32,
-          selectedItemColor: AppColors.greenColor,
-          unselectedItemColor: Colors.grey,
-          onTap: (index) {
-            changeTab(index);
-          },
-          type: BottomNavigationBarType.fixed,
-          currentIndex: selectedIndex,
-          backgroundColor: Colors.white,
-          items: generateBottomNavItems({
-            Icons.home: "Home",
-            Icons.wallet: "Debts",
-            Icons.library_books_sharp: "Transactions",
-            Icons.bar_chart: "statistics",
-          })),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: taps[selectedIndex],
+        bottomNavigationBar: Container(
+          margin: EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            border: Border.all(width: 8, color: AppColors.transparentGreenColor)
+          ),
+          child: BottomNavigationBar(
+              selectedLabelStyle: const TextStyle(
+                fontSize: 12, // Fixed font size
+                fontWeight: FontWeight.w500,
+              ),
+              unselectedLabelStyle: const TextStyle(
+                fontSize: 12, // Same as selected
+                fontWeight: FontWeight.w500,
+              ),
+              iconSize: 32,
+              selectedItemColor: AppColors.greenColor,
+              unselectedItemColor: Colors.grey,
+              onTap: (index) {
+                changeTab(index);
+              },
+              type: BottomNavigationBarType.fixed,
+              currentIndex: selectedIndex,
+              items: generateBottomNavItems({
+                Icons.home: "Home",
+                Icons.wallet: "Debts",
+                Icons.library_books_sharp: "Transactions",
+                Icons.bar_chart: "statistics",
+              })),
+        ),
+      ),
     );
   }
 }
