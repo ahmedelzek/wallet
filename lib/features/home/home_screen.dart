@@ -50,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
               currentIndex: selectedIndex,
               items: generateBottomNavItems({
                 Icons.home: "Home",
-                Icons.wallet: "Debts",
                 Icons.library_books_sharp: "Transactions",
+                Icons.wallet: "Debts",
                 Icons.bar_chart: "statistics",
               })),
         ),
