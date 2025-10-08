@@ -4,6 +4,8 @@ import '../../core/resources/app_colors.dart';
 import 'home_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String routeName = "home";
+
   const HomeScreen({super.key});
 
   @override
