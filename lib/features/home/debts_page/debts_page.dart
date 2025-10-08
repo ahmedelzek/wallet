@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/resources/app_colors.dart';
+import '../../../l10n/app_translations.dart';
 
 class DebtsPage extends StatelessWidget {
   const DebtsPage({super.key});
@@ -18,15 +19,19 @@ class DebtsPage extends StatelessWidget {
               indicatorColor: AppColors.greenColor,
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorWeight: 3,
-              tabs: [Tab(text: "All"), Tab(text: "Pending"), Tab(text: "Paid")],
+              tabs: [
+                Tab(text: LocalizationService.instance.tr.tabAll),
+                Tab(text: LocalizationService.instance.tr.tabPending),
+                Tab(text: LocalizationService.instance.tr.tabPaid),
+              ],
             ),
           ),
         ),
         body: TabBarView(
           children: [
-            Center(child: Text("All")),
-            Center(child: Text("Pending")),
-            Center(child: Text("Paid")),
+            Center(child: Text(LocalizationService.instance.tr.tabAll)),
+            Center(child: Text(LocalizationService.instance.tr.tabPending)),
+            Center(child: Text(LocalizationService.instance.tr.tabPaid)),
           ],
         ),
       ),

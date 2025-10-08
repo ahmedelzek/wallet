@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/features/home/home_page/home_page_widgets.dart';
 
+import '../../../l10n/app_translations.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -24,7 +26,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Current Balance",
+                  LocalizationService.instance.tr.currentBalance,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -43,14 +45,14 @@ class HomePage extends StatelessWidget {
                 Row(
                   children: [
                     balanceCard(
-                      "Income",
+                      LocalizationService.instance.tr.income,
                       "4000.0",
                       Icons.arrow_downward,
                       AppColors.greenColor,
                     ),
                     SizedBox(width: 20),
                     balanceCard(
-                      "Outgoing",
+                      LocalizationService.instance.tr.outgoing,
                       "2000.0",
                       Icons.arrow_upward,
                       AppColors.redColor,
@@ -69,7 +71,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
-              "Quick Transactions",
+              LocalizationService.instance.tr.quickTransactions,
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
           ),
@@ -104,7 +106,7 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: Center(
               child: Text(
-                "No Transactions Yet",
+                LocalizationService.instance.tr.noTransactionsYet,
                 style: TextStyle(fontSize: 22),
               ),
             ),

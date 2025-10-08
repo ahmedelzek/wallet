@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/resources/app_colors.dart';
+import '../../l10n/app_translations.dart';
 import 'home_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,10 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
               type: BottomNavigationBarType.fixed,
               currentIndex: selectedIndex,
               items: generateBottomNavItems({
-                Icons.home: "Home",
-                Icons.library_books_sharp: "Transactions",
-                Icons.wallet: "Debts",
-                Icons.bar_chart: "statistics",
+                Icons.home: LocalizationService.instance.tr.home,
+                Icons.library_books_sharp: LocalizationService.instance.tr.transactions,
+                Icons.wallet: LocalizationService.instance.tr.debts,
+                Icons.bar_chart: LocalizationService.instance.tr.statistics,
               })),
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 
+import '../../../l10n/app_translations.dart';
+
 class AddTransactionScreen extends StatefulWidget {
   static const String routeName = "add_transaction";
 
@@ -12,11 +14,11 @@ class AddTransactionScreen extends StatefulWidget {
 
 class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final Map<String, Color> _typeColors = {
-    "Income": AppColors.greenColor,
-    "Outgoing": AppColors.redColor,
-    "Saving": AppColors.blueColor,
-    "Debt pending": AppColors.orangeColor,
-    "Debt paid": AppColors.orangeColor,
+    LocalizationService.instance.tr.income: AppColors.greenColor,
+    LocalizationService.instance.tr.outgoing: AppColors.redColor,
+    LocalizationService.instance.tr.savings: AppColors.blueColor,
+    LocalizationService.instance.tr.debtPending: AppColors.orangeColor,
+    LocalizationService.instance.tr.debtPaid: AppColors.orangeColor,
   };
 
   String? _selectedType;
@@ -29,7 +31,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
           backgroundColor: Colors.white,
           elevation: 0,
           title: Text(
-            "Add Transaction",
+            LocalizationService.instance.tr.addTransaction,
             style: Theme
                 .of(context)
                 .textTheme
@@ -56,7 +58,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             ),
             child: DropdownButton<String>(
               isExpanded: true,
-              hint: const Text("Select Transaction Type"),
+              hint: Text(LocalizationService.instance.tr.selectTransactionType),
               value: _selectedType,
               items:
               _typeColors.keys.map((String type) {
@@ -86,14 +88,14 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextFormField(
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 border: InputBorder.none,
                 hintStyle: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
-                hintText: "Enter Amount",
+                hintText: LocalizationService.instance.tr.enterAmount,
               ),
               keyboardType: TextInputType.number,
             ),
@@ -108,7 +110,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             child: TextFormField(
               minLines: 6,
               maxLines: 10,
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 border: InputBorder.none,
                 alignLabelWithHint: true,
                 hintStyle: TextStyle(
@@ -116,7 +118,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
-                hintText: "Enter Description Or Note",
+                hintText: LocalizationService.instance.tr.enterDescriptionOrNote,
               ),
             ),
           ),
@@ -136,7 +138,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
               ),
             ),
             onPressed: () {},
-            child: Text("Add Transaction", style: Theme
+            child: Text(LocalizationService.instance.tr.addTransactionButton, style: Theme
                 .of(context)
                 .textTheme
                 .headlineMedium
