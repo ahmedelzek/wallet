@@ -3,6 +3,7 @@
   "addTransaction": "Add Transaction",
   "selectTransactionType": "Select Transaction Type",
   "enterAmount": "Enter Amount",
+  "enterTitle": "Enter Title",
   "enterDescriptionOrNote": "Enter Description Or Note",
   "addTransactionButton": "Add Transaction",
   "tabAll": "All",
