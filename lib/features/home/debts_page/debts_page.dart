@@ -15,8 +15,8 @@ class DebtsPage extends StatelessWidget {
           title: Padding(
             padding: EdgeInsets.only(top: 10),
             child: TabBar(
-              labelColor: AppColors.greenColor,
-              indicatorColor: AppColors.greenColor,
+              labelColor: AppColors.green,
+              indicatorColor: AppColors.green,
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorWeight: 3,
               tabs: [

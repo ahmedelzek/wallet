@@ -13,9 +13,9 @@ List<BottomNavigationBarItem> generateBottomNavItems(
     activeIcon: Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         decoration: BoxDecoration(
-            color: AppColors.transparentGreenColor,
+            color: AppColors.transparentGreen,
             borderRadius: BorderRadius.circular(10)),
-        child: Icon(entry.key, color: AppColors.greenColor)),
+        child: Icon(entry.key, color: AppColors.green)),
     backgroundColor: Colors.white,
     label: entry.value,
   )

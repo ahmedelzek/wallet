@@ -14,11 +14,11 @@ class AddTransactionScreen extends StatefulWidget {
 
 class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final Map<String, Color> _typeColors = {
-    LocalizationService.instance.tr.income: AppColors.greenColor,
-    LocalizationService.instance.tr.outgoing: AppColors.redColor,
-    LocalizationService.instance.tr.savings: AppColors.blueColor,
-    LocalizationService.instance.tr.debtPending: AppColors.orangeColor,
-    LocalizationService.instance.tr.debtPaid: AppColors.orangeColor,
+    LocalizationService.instance.tr.income: AppColors.green,
+    LocalizationService.instance.tr.outgoing: AppColors.red,
+    LocalizationService.instance.tr.savings: AppColors.blue,
+    LocalizationService.instance.tr.debtPending: AppColors.orange,
+    LocalizationService.instance.tr.debtPaid: AppColors.orange,
   };
 
   String? _selectedType;
@@ -28,7 +28,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.mintWhite,
           elevation: 0,
           title: Text(
             LocalizationService.instance.tr.addTransaction,
@@ -37,7 +37,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                 .textTheme
                 .headlineMedium
                 ?.copyWith(
-              color: AppColors.greenColor,
+              color: AppColors.green,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -53,7 +53,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             width: double.infinity,
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.greyColor,
+              color: AppColors.lightGrey,
               borderRadius: BorderRadius.circular(10),
             ),
             child: DropdownButton<String>(
@@ -84,17 +84,11 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
           Container(
             padding: EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: AppColors.greyColor,
+              color: AppColors.lightGrey,
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextFormField(
               decoration:  InputDecoration(
-                border: InputBorder.none,
-                hintStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
                 hintText: LocalizationService.instance.tr.enterAmount,
               ),
               keyboardType: TextInputType.number,
@@ -104,7 +98,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
           Container(
             padding: EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: AppColors.greyColor,
+              color: AppColors.lightGrey,
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextFormField(
@@ -112,37 +106,14 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
               maxLines: 10,
               decoration:  InputDecoration(
                 border: InputBorder.none,
-                alignLabelWithHint: true,
-                hintStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
                 hintText: LocalizationService.instance.tr.enterDescriptionOrNote,
               ),
             ),
           ),
           const SizedBox(height: 35),
           ElevatedButton(
-            style: ButtonStyle(
-              fixedSize: WidgetStateProperty.all<Size>(
-                const Size(double.infinity, 50),
-              ),
-              backgroundColor: WidgetStateProperty.all<Color>(
-                AppColors.greenColor,
-              ),
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-            ),
             onPressed: () {},
-            child: Text(LocalizationService.instance.tr.addTransactionButton, style: Theme
-                .of(context)
-                .textTheme
-                .headlineMedium
-                ?.copyWith(color: Colors.white),
+            child: Text(LocalizationService.instance.tr.addTransactionButton,
             ),)
             ],
           ),

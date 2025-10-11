@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:wallet/features/home/home_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'core/resources/app_theme.dart';
 import 'features/home/add_transaction_screen/add_transaction_screen.dart';
 import 'l10n/app_translations.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.lightTheme,
       title: 'Wallet',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         return child!;
       },
       locale: const Locale('ar'),
-      initialRoute: AddTransactionScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
         AddTransactionScreen.routeName: (context) => AddTransactionScreen(),

@@ -24,7 +24,7 @@ Widget balanceCard(String title, String amount, IconData icon, Color color) {
   return Container(
     padding: EdgeInsets.all(10),
     decoration: BoxDecoration(
-      color: AppColors.transparentGreenColor,
+      color: AppColors.transparentGreen,
       borderRadius: BorderRadius.circular(12),
     ),
     child: Row(
@@ -40,7 +40,7 @@ Widget balanceCard(String title, String amount, IconData icon, Color color) {
             Text(
               title,
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.mintWhite,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
@@ -48,7 +48,7 @@ Widget balanceCard(String title, String amount, IconData icon, Color color) {
             Text(
               "$amount  EGP",
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.mintWhite,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),

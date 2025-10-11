@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           margin: EdgeInsets.symmetric(vertical: 14, horizontal: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
-            border: Border.all(width: 8, color: AppColors.transparentGreenColor)
+            border: Border.all(width: 8, color: AppColors.transparentGreen)
           ),
           child: BottomNavigationBar(
               selectedLabelStyle: const TextStyle(
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w500,
               ),
               iconSize: 32,
-              selectedItemColor: AppColors.greenColor,
+              selectedItemColor: AppColors.green,
               unselectedItemColor: Colors.grey,
               onTap: (index) {
                 changeTab(index);

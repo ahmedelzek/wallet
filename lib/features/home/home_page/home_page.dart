@@ -3,6 +3,7 @@ import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/features/home/home_page/home_page_widgets.dart';
 
 import '../../../l10n/app_translations.dart';
+import '../add_transaction_screen/add_transaction_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: AppColors.darkGreenColor,
+              color: AppColors.darkGreen,
               borderRadius: BorderRadius.circular(20),
             ),
             height: 300,
@@ -48,14 +49,14 @@ class HomePage extends StatelessWidget {
                       LocalizationService.instance.tr.income,
                       "4000.0",
                       Icons.arrow_downward,
-                      AppColors.greenColor,
+                      AppColors.green,
                     ),
                     SizedBox(width: 20),
                     balanceCard(
                       LocalizationService.instance.tr.outgoing,
                       "2000.0",
                       Icons.arrow_upward,
-                      AppColors.redColor,
+                      AppColors.red,
                     ),
                   ],
                 ),
@@ -67,7 +68,7 @@ class HomePage extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.transparentGreenColor,
+              color: AppColors.transparentGreen,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
@@ -75,33 +76,38 @@ class HomePage extends StatelessWidget {
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buttonContainer(
-                AppColors.transparentGreenColor,
-                AppColors.darkGreenColor,
-                Icons.add,
-              ),
-              SizedBox(width: 20),
-              buttonContainer(
-                AppColors.transparentRedColor,
-                AppColors.redColor,
-                Icons.remove,
-              ),
-              SizedBox(width: 20),
-              buttonContainer(
-                AppColors.transparentOrangeColor,
-                AppColors.orangeColor,
-                Icons.account_balance,
-              ),
-              SizedBox(width: 20),
-              buttonContainer(
-                AppColors.transparentBlueColor,
-                AppColors.blueColor,
-                Icons.account_balance_wallet,
-              ),
-            ],
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, AddTransactionScreen.routeName);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buttonContainer(
+                  AppColors.transparentGreen,
+                  AppColors.darkGreen,
+                  Icons.add,
+                ),
+                SizedBox(width: 20),
+                buttonContainer(
+                  AppColors.transparentRed,
+                  AppColors.red,
+                  Icons.remove,
+                ),
+                SizedBox(width: 20),
+                buttonContainer(
+                  AppColors.transparentOrange,
+                  AppColors.orange,
+                  Icons.account_balance,
+                ),
+                SizedBox(width: 20),
+                buttonContainer(
+                  AppColors.transparentBlue,
+                  AppColors.blue,
+                  Icons.account_balance_wallet,
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: Center(
