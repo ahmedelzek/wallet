@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/core/di/injector.dart';
+import 'package:wallet/core/resources/app_colors.dart';
 import '../../../domain/entities/transactions_entities.dart';
 import '../../../domain/use_cases/add_transaction_usecase.dart';
 import '../../../l10n/app_translations.dart';
+import '../home_screen/home_page/cubit/transaction_cubit.dart';
 import 'cubit/add_transaction_state.dart';
 import 'cubit/add_transactions_cubit.dart';
 
@@ -113,8 +114,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       ),
                     ),
                     const SizedBox(height: 35),
-
-                    // 🏷️ Title field
                     Container(
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
@@ -169,7 +168,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     ElevatedButton(
                       onPressed: state is AddTransactionLoading
                           ? null
-                          : () {
+                          : ()  {
                         if (_selectedType == null ||
                             _titleController.text.isEmpty ||
                             _amountController.text.isEmpty) {
@@ -191,9 +190,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                               : _noteController.text,
                           type: _selectedType!,
                         );
-                        context
+                         context
                             .read<AddTransactionCubit>()
                             .addTransaction(transaction);
+
+                        context.read<TransactionCubit>().loadTransactions();
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),

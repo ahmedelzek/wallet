@@ -5,7 +5,7 @@ import '../../l10n/app_translations.dart';
 import 'home_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String routeName = "home";
+  static const String routeName = "home_screen";
 
   const HomeScreen({super.key});
 
