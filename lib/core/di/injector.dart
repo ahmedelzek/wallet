@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wallet/domain/use_cases/get_income_sum_usecase.dart';
+import 'package:wallet/domain/use_cases/get_net_balance_usecase.dart';
+import 'package:wallet/domain/use_cases/get_outgoing_sum_usecase.dart';
 import 'package:wallet/features/add_transaction_screen/cubit/add_transactions_cubit.dart';
 
 import '../../data/models/transactions_model.dart';
@@ -19,13 +22,34 @@ Future<void> initDependencies() async {
 
   sl.registerLazySingleton<Box<TransactionModel>>(() => transactionBox);
 
-
   sl.registerLazySingleton<TransactionRepository>(
-        () => TransactionRepositoryImpl(sl<Box<TransactionModel>>()),
+    () => TransactionRepositoryImpl(sl<Box<TransactionModel>>()),
   );
 
-  sl.registerLazySingleton(() => AddTransactionUseCase(sl<TransactionRepository>()));
-  sl.registerLazySingleton(() => AddTransactionCubit(sl<AddTransactionUseCase>()));
-  sl.registerLazySingleton(() => GetTransactionsUseCase(sl<TransactionRepository>()));
-  sl.registerFactory(() => TransactionCubit(sl<GetTransactionsUseCase>()));
+  sl.registerLazySingleton(
+    () => AddTransactionUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => AddTransactionCubit(sl<AddTransactionUseCase>()),
+  );
+  sl.registerLazySingleton(
+    () => GetTransactionsUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => GetNetBalanceUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => GetIncomeSumUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => GetOutgoingSumUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerFactory(
+    () => TransactionCubit(
+      sl<GetTransactionsUseCase>(),
+      sl<GetIncomeSumUseCase>(),
+      sl<GetOutgoingSumUseCase>(),
+      sl<GetNetBalanceUseCase>(),
+    ),
+  );
 }

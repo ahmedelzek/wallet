@@ -3,4 +3,10 @@ import '../entities/transactions_entities.dart';
 abstract class TransactionRepository {
   Future<void> addTransaction(TransactionEntity transaction);
   Future<List<TransactionEntity>> getAllTransactions();
+  Future<double> getIncomeSum();
+  Future<double> getOutgoingSum();
+  Future<double> getSavingsSum();
+  Future<double> getDebtPendingSum();
+  Future<double> getDebtPaidSum();
+  Future<double> getNetBalance();
 }

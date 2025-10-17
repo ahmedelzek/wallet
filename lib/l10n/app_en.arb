@@ -21,5 +21,13 @@
   "home": "Home",
   "transactions": "Transactions",
   "debts": "Debts",
-  "statistics": "Statistics"
+  "statistics": "Statistics",
+  "settings": "Settings",
+  "delete": "Delete",
+  "deleteAll": "Delete All",
+  "confirmDelete": "Are you sure you want to delete this transaction?",
+  "edit": "Edit",
+  "saveChanges": "Save Changes",
+  "cancel": "Cancel",
+  "save": "Save"
 }

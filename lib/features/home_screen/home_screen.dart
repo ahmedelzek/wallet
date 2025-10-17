@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.home: LocalizationService.instance.tr.home,
                 Icons.library_books_sharp: LocalizationService.instance.tr.transactions,
                 Icons.wallet: LocalizationService.instance.tr.debts,
-                Icons.bar_chart: LocalizationService.instance.tr.statistics,
+                Icons.settings: LocalizationService.instance.tr.settings,
               })),
         ),
       ),
