@@ -107,7 +107,6 @@ class _HomePageState extends State<HomePage> {
                       context,
                       AddTransactionScreen.routeName,
                     ).then((_) {
-                      // Reload data after returning from AddTransaction screen
                       context.read<TransactionCubit>().loadTransactions();
                     });
                   },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet/features/home_screen/statistics_page/statistics_page.dart';
+import 'package:wallet/features/home_screen/settings_page/settings_page.dart';
 import 'package:wallet/features/home_screen/transactions_page/transactions_page.dart';
 import '../../core/resources/app_colors.dart';
 import 'debts_page/debts_page.dart';
@@ -26,5 +26,5 @@ List<Widget> taps = [
   const HomePage(),
   const TransactionsPage(),
   const DebtsPage(),
-  const StatisticsPage(),
+  const SettingsPage(),
 ];

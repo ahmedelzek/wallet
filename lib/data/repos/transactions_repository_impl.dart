@@ -15,6 +15,15 @@ class TransactionRepositoryImpl implements TransactionRepository {
     final model = TransactionModel.fromEntity(transaction);
     await _box.put(model.id, model);
   }
+  @override
+  Future<void> deleteAllTransactions() async {
+    await _box.clear();
+  }
+
+  @override
+  Future<void> deleteTransaction(int id) async {
+    await _box.delete(id);
+  }
 
   @override
   Future<List<TransactionEntity>> getAllTransactions() async {

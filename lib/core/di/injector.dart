@@ -1,9 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wallet/domain/use_cases/delete_all_trasnactions_usecase.dart';
 import 'package:wallet/domain/use_cases/get_income_sum_usecase.dart';
 import 'package:wallet/domain/use_cases/get_net_balance_usecase.dart';
 import 'package:wallet/domain/use_cases/get_outgoing_sum_usecase.dart';
 import 'package:wallet/features/add_transaction_screen/cubit/add_transactions_cubit.dart';
+import 'package:wallet/features/home_screen/settings_page/cubit/delete_cubit.dart';
 
 import '../../data/models/transactions_model.dart';
 import '../../data/repos/transactions_repository_impl.dart';
@@ -31,6 +33,12 @@ Future<void> initDependencies() async {
   );
   sl.registerLazySingleton(
     () => AddTransactionCubit(sl<AddTransactionUseCase>()),
+  );
+  sl.registerLazySingleton(
+    () => DeleteAllTransactionsUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => DeleteCubit(sl<DeleteAllTransactionsUseCase>()),
   );
   sl.registerLazySingleton(
     () => GetTransactionsUseCase(sl<TransactionRepository>()),

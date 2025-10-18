@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
+import 'package:wallet/features/home_screen/settings_page/cubit/delete_cubit.dart';
 import 'core/di/injector.dart';
 import 'core/resources/app_theme.dart';
 import 'features/add_transaction_screen/add_transaction_screen.dart';
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<TransactionCubit>(
           create: (_) => sl<TransactionCubit>()..loadTransactions(),
+        ),
+        BlocProvider<DeleteCubit>(
+          create: (_) => sl<DeleteCubit>(),
         ),
       ],
       child: MaterialApp(

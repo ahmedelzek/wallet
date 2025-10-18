@@ -14,7 +14,6 @@ class AppTheme {
 
     scaffoldBackgroundColor:AppColors.mintWhite,
 
-    // Rounded shapes
     cardTheme: CardTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -106,6 +105,27 @@ class AppTheme {
         fontSize: 14,
         fontWeight: FontWeight.w600,
         color: Colors.white,
+      ),
+    ),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      inputDecorationTheme: const InputDecorationTheme(
+        border: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        contentPadding: EdgeInsets.all(15),
+      ),
+      textStyle: const TextStyle(
+        fontSize: 16,
+        color: Colors.black,
+      ),
+      menuStyle: MenuStyle(
+        backgroundColor: WidgetStatePropertyAll(Colors.white),
+        elevation: WidgetStatePropertyAll(4),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+        ),
       ),
     ),
   );
