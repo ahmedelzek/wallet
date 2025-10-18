@@ -33,6 +33,8 @@
   "saveChanges": "Save Changes",
   "cancel": "Cancel",
   "save": "Save",
-  "deleteShowDialogTitle": "Delete All Transactions",
-  "deleteShowDialogMessage": "Are you sure you want to delete all tasks?"
+  "deleteAllShowDialogTitle": "Delete All Transactions",
+  "deleteAllShowDialogMessage": "Are you sure you want to delete all transactions?",
+  "deleteTransaction": "Delete Transaction",
+  "deleteTransactionMessage": "Are you sure you want to delete this transaction?"
 }

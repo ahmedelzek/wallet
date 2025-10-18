@@ -20,7 +20,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: BlocListener<DeleteCubit, DeleteState>(
+      child: BlocListener<DeleteAllCubit, DeleteAllState>(
         listener: (context, state) {
           if (state is DeleteLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -52,9 +52,13 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () async {
-                final confirm = await showDeleteAllDialog(context);
+                final confirm = await showDeleteAllDialog(
+                  context,
+                  LocalizationService.instance.tr.deleteAllShowDialogTitle,
+                  LocalizationService.instance.tr.deleteAllShowDialogMessage,
+                );
                 if (confirm == true) {
-                  context.read<DeleteCubit>().deleteAllTransactions();
+                  context.read<DeleteAllCubit>().deleteAllTransactions();
                 }
               },
               style: ElevatedButton.styleFrom(

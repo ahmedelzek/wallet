@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/core/di/injector.dart';
 import 'package:wallet/core/resources/app_colors.dart';
@@ -139,6 +140,9 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       child: TextFormField(
                         controller: _amountController,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                         decoration: InputDecoration(
                           hintText: LocalizationService.instance.tr.enterAmount,
                           border: InputBorder.none,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
-Future<bool?> showDeleteAllDialog(BuildContext context) async {
+Future<bool?> showDeleteAllDialog(BuildContext context, String title, String message) async {
   return showDialog<bool>(
     context: context,
     barrierDismissible: false, // user must tap a button
@@ -11,11 +11,11 @@ Future<bool?> showDeleteAllDialog(BuildContext context) async {
           borderRadius: BorderRadius.circular(16),
         ),
         title:  Text(
-          LocalizationService.instance.tr.deleteShowDialogTitle,
+          title,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         content: Text(
-          LocalizationService.instance.tr.deleteShowDialogMessage,
+          message,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actionsAlignment: MainAxisAlignment.end,

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wallet/domain/use_cases/delete_all_trasnactions_usecase.dart';
+import 'package:wallet/domain/use_cases/delete_transaction_by_id_usecase.dart';
 import 'package:wallet/domain/use_cases/get_income_sum_usecase.dart';
 import 'package:wallet/domain/use_cases/get_net_balance_usecase.dart';
 import 'package:wallet/domain/use_cases/get_outgoing_sum_usecase.dart';
@@ -38,7 +39,10 @@ Future<void> initDependencies() async {
     () => DeleteAllTransactionsUseCase(sl<TransactionRepository>()),
   );
   sl.registerLazySingleton(
-    () => DeleteCubit(sl<DeleteAllTransactionsUseCase>()),
+    () => DeleteAllCubit(sl<DeleteAllTransactionsUseCase>()),
+  );
+  sl.registerLazySingleton(
+    () => DeleteTransactionByIdUseCase(sl<TransactionRepository>()),
   );
   sl.registerLazySingleton(
     () => GetTransactionsUseCase(sl<TransactionRepository>()),
@@ -58,6 +62,7 @@ Future<void> initDependencies() async {
       sl<GetIncomeSumUseCase>(),
       sl<GetOutgoingSumUseCase>(),
       sl<GetNetBalanceUseCase>(),
+      sl<DeleteTransactionByIdUseCase>(),
     ),
   );
 }

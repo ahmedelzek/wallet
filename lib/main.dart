@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<TransactionCubit>(
           create: (_) => sl<TransactionCubit>()..loadTransactions(),
         ),
-        BlocProvider<DeleteCubit>(
-          create: (_) => sl<DeleteCubit>(),
+        BlocProvider<DeleteAllCubit>(
+          create: (_) => sl<DeleteAllCubit>(),
         ),
       ],
       child: MaterialApp(

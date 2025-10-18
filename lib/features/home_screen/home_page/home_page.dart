@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wallet/core/customized_widgets/customized_transaction_card.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 
@@ -17,7 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     super.initState();
@@ -140,17 +140,50 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Expanded(
-                  child: state.transactions.isEmpty
-                      ? const Center(child: Text("No transactions yet"))
-                      : ListView.builder(
-                    itemCount: state.transactions.length,
-                    itemBuilder: (context, index) {
-                      final transaction = state.transactions[index];
-                      return CustomizedTransactionCard(
-                        transaction: transaction,
-                      );
-                    },
-                  ),
+                  child:
+                      state.transactions.isEmpty
+                          ? const Center(child: Text("No transactions yet"))
+                          : ListView.separated(
+                            itemCount: state.transactions.length,
+
+                            itemBuilder: (context, index) {
+                              final transaction = state.transactions[index];
+                              return Slidable(
+                                startActionPane: ActionPane(
+                                  motion: const ScrollMotion(),
+                                  extentRatio: .25,
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (context) {
+                                          context.read<TransactionCubit>().deleteTransaction(transaction.id);
+                                      },
+                                      backgroundColor: AppColors.red,
+                                      foregroundColor: AppColors.white,
+                                      icon: Icons.delete,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                      ),
+                                      label:
+                                          LocalizationService
+                                              .instance
+                                              .tr
+                                              .delete,
+                                    ),
+                                  ],
+                                ),
+                                child: CustomizedTransactionCard(
+                                  transaction: transaction,
+                                ),
+                              );
+                            },
+                            separatorBuilder: (
+                              BuildContext context,
+                              int index,
+                            ) {
+                              return const SizedBox(height: 10);
+                            },
+                          ),
                 ),
               ],
             );

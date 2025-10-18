@@ -1,10 +1,10 @@
-abstract class DeleteState{}
+abstract class DeleteAllState{}
 
-class DeleteLoading extends DeleteState{}
+class DeleteLoading extends DeleteAllState{}
 
-class DeleteSuccess extends DeleteState{
+class DeleteSuccess extends DeleteAllState{
 
 }
-class DeleteFailure extends DeleteState{
+class DeleteFailure extends DeleteAllState{
 
 }
