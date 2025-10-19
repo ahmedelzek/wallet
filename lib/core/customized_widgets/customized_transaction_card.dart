@@ -39,6 +39,7 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
           SizedBox(width: 20),
           Expanded(
             child: Column(
+              spacing: 4,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -50,7 +51,7 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
                   ),
                 ),
                 Text(
-                  widget.transaction.amount.toString(),
+                  "${widget.transaction.amount.toString()} EGP",
                   style: TextStyle(
                     color: _setColor(widget.transaction.type),
                     fontWeight: FontWeight.bold,

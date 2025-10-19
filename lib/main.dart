@@ -9,6 +9,7 @@ import 'features/add_transaction_screen/add_transaction_screen.dart';
 import 'features/add_transaction_screen/cubit/add_transactions_cubit.dart';
 import 'features/home_screen/home_page/cubit/transaction_cubit.dart';
 import 'features/home_screen/home_screen.dart';
+import 'features/update_transaction_screen/update_transaction_screen.dart';
 import 'l10n/app_translations.dart';
 
 Future<void> main() async {
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomeScreen.routeName: (context) => const HomeScreen(),
           AddTransactionScreen.routeName: (context) => AddTransactionScreen(),
+          UpdateTransactionScreen.routeName: (context) => UpdateTransactionScreen(),
         },
       ),
     );

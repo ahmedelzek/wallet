@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wallet/core/customized_widgets/customized_text_fields.dart';
+import 'package:wallet/core/customized_widgets/customized_type_drop_down.dart';
 import 'package:wallet/core/di/injector.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 import '../../../domain/entities/transactions_entities.dart';
@@ -25,14 +26,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final TextEditingController _noteController = TextEditingController();
 
   String? _selectedType;
-
-  final Map<String, Color> _typeColors = {
-    LocalizationService.instance.tr.income: AppColors.green,
-    LocalizationService.instance.tr.outgoing: AppColors.red,
-    LocalizationService.instance.tr.savings: AppColors.blue,
-    LocalizationService.instance.tr.debtPending: AppColors.orange,
-    LocalizationService.instance.tr.debtPaid: AppColors.orange,
-  };
 
   @override
   void dispose() {
@@ -81,94 +74,17 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
               body: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
                 child: Column(
+                  spacing: 35,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Container(
-                      height: 50,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGrey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        hint: Text(LocalizationService.instance.tr.selectTransactionType),
-                        value: _selectedType,
-                        items: _typeColors.keys.map((String type) {
-                          return DropdownMenuItem<String>(
-                            value: type,
-                            child: Text(
-                              type,
-                              style: TextStyle(
-                                color: _typeColors[type],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedType = newValue;
-                          });
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 35),
-                    Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGrey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: _titleController,
-                        decoration: InputDecoration(
-                          hintText: LocalizationService.instance.tr.enterTitle,
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 35),
-
-                    Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGrey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: _amountController,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        decoration: InputDecoration(
-                          hintText: LocalizationService.instance.tr.enterAmount,
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 35),
-
-                    Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightGrey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        controller: _noteController,
-                        minLines: 6,
-                        maxLines: 10,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText:
-                          LocalizationService.instance.tr.enterDescriptionOrNote,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 35),
+                  customizedTypeDropDown(_selectedType, (value) {
+                    setState(() {
+                      _selectedType = value;
+                    });
+                  }),
+                    customizedTitleTextFormField(_titleController),
+                    customizedAmountTextFormField(_amountController),
+                    customizedDescriptionTextFormField(_noteController),
                     ElevatedButton(
                       onPressed: state is AddTransactionLoading
                           ? null
@@ -209,10 +125,10 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                         ),
                       ),
                       child: state is AddTransactionLoading
-                          ? const CircularProgressIndicator(color: Colors.white)
+                          ? const CircularProgressIndicator(color: AppColors.white)
                           : Text(
                         LocalizationService.instance.tr.addTransactionButton,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: AppColors.white),
                       ),
                     ),
                   ],

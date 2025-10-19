@@ -12,7 +12,7 @@ class AppTheme {
     ),
     useMaterial3: true,
 
-    scaffoldBackgroundColor:AppColors.mintWhite,
+    scaffoldBackgroundColor:AppColors.white,
 
     cardTheme: CardTheme(
       shape: RoundedRectangleBorder(

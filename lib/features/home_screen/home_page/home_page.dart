@@ -6,6 +6,7 @@ import 'package:wallet/core/resources/app_colors.dart';
 
 import '../../../l10n/app_translations.dart';
 import '../../add_transaction_screen/add_transaction_screen.dart';
+import '../../update_transaction_screen/update_transaction_screen.dart';
 import 'cubit/transaction_cubit.dart';
 import 'cubit/transaction_state.dart';
 import 'home_page_widgets.dart';
@@ -151,10 +152,10 @@ class _HomePageState extends State<HomePage> {
                               return Slidable(
                                 startActionPane: ActionPane(
                                   motion: const ScrollMotion(),
-                                  extentRatio: .25,
+                                  extentRatio: .4,
                                   children: [
                                     SlidableAction(
-                                      onPressed: (context) {
+                                      onPressed: (_) {
                                           context.read<TransactionCubit>().deleteTransaction(transaction.id);
                                       },
                                       backgroundColor: AppColors.red,
@@ -169,6 +170,22 @@ class _HomePageState extends State<HomePage> {
                                               .instance
                                               .tr
                                               .delete,
+                                    ),
+                                    SlidableAction(
+                                      onPressed: (_) {
+                                        Navigator.pushNamed(
+                                          context,
+                                          UpdateTransactionScreen.routeName,
+                                        );
+                                      },
+                                      backgroundColor: AppColors.blue,
+                                      foregroundColor: AppColors.white,
+                                      icon: Icons.edit,
+                                      label:
+                                          LocalizationService
+                                              .instance
+                                              .tr
+                                              .edit,
                                     ),
                                   ],
                                 ),
