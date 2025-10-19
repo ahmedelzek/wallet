@@ -176,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                                         Navigator.pushNamed(
                                           context,
                                           UpdateTransactionScreen.routeName,
+                                          arguments: transaction,
                                         );
                                       },
                                       backgroundColor: AppColors.blue,

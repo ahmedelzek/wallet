@@ -9,6 +9,7 @@ import 'features/add_transaction_screen/add_transaction_screen.dart';
 import 'features/add_transaction_screen/cubit/add_transactions_cubit.dart';
 import 'features/home_screen/home_page/cubit/transaction_cubit.dart';
 import 'features/home_screen/home_screen.dart';
+import 'features/update_transaction_screen/cubit/update_transaction_cubit.dart';
 import 'features/update_transaction_screen/update_transaction_screen.dart';
 import 'l10n/app_translations.dart';
 
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<DeleteAllCubit>(
           create: (_) => sl<DeleteAllCubit>(),
+        ),
+        BlocProvider<UpdateTransactionCubit>(
+          create: (_) => sl<UpdateTransactionCubit>(),
         ),
       ],
       child: MaterialApp(

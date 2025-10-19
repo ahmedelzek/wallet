@@ -4,7 +4,7 @@ import '../../l10n/app_translations.dart';
 import '../resources/app_colors.dart';
 import '../resources/color_list.dart';
 
-Widget customizedTypeDropDown(String? selectedType, Function(String?) setState){
+Widget customizedTypeDropDown(String? selectedType, Function(String?) onChanged){
   return Container(
     height: 50,
     width: double.infinity,
@@ -14,6 +14,7 @@ Widget customizedTypeDropDown(String? selectedType, Function(String?) setState){
       borderRadius: BorderRadius.circular(10),
     ),
     child: DropdownButton<String>(
+      key: ValueKey(selectedType),
       isExpanded: true,
       hint: Text(LocalizationService.instance.tr.selectTransactionType),
       value: selectedType,
@@ -29,9 +30,7 @@ Widget customizedTypeDropDown(String? selectedType, Function(String?) setState){
           ),
         );
       }).toList(),
-      onChanged: (String? newValue) {
-       setState(newValue);
-      },
+      onChanged: onChanged,
     ),
   );
 }

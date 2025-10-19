@@ -11,7 +11,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
   TransactionRepositoryImpl(this._box);
 
   @override
-  Future<void> addTransaction(TransactionEntity transaction) async {
+  Future<void> addOrUpdateTransaction(TransactionEntity transaction) async {
     final model = TransactionModel.fromEntity(transaction);
     await _box.put(model.id, model);
   }

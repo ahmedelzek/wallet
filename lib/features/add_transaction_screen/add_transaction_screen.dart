@@ -125,7 +125,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                         ),
                       ),
                       child: state is AddTransactionLoading
-                          ? const CircularProgressIndicator(color: AppColors.white)
+                          ? const CircularProgressIndicator(color: AppColors.green)
                           : Text(
                         LocalizationService.instance.tr.addTransactionButton,
                         style: const TextStyle(color: AppColors.white),

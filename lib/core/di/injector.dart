@@ -7,12 +7,14 @@ import 'package:wallet/domain/use_cases/get_net_balance_usecase.dart';
 import 'package:wallet/domain/use_cases/get_outgoing_sum_usecase.dart';
 import 'package:wallet/features/add_transaction_screen/cubit/add_transactions_cubit.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/delete_cubit.dart';
+import 'package:wallet/features/update_transaction_screen/cubit/update_transaction_cubit.dart';
 
 import '../../data/models/transactions_model.dart';
 import '../../data/repos/transactions_repository_impl.dart';
 import '../../domain/repos/transactions_repository.dart';
 import '../../domain/use_cases/add_transaction_usecase.dart';
 import '../../domain/use_cases/get_transactions_usecase.dart';
+import '../../domain/use_cases/update_transaction_usecase.dart';
 import '../../features/home_screen/home_page/cubit/transaction_cubit.dart';
 
 final sl = GetIt.instance;
@@ -31,6 +33,12 @@ Future<void> initDependencies() async {
 
   sl.registerLazySingleton(
     () => AddTransactionUseCase(sl<TransactionRepository>()),
+  );
+  sl.registerLazySingleton(
+    () => UpdateTransactionUseCase(sl<TransactionRepository>())
+  );
+  sl.registerLazySingleton(
+    () => UpdateTransactionCubit(sl<UpdateTransactionUseCase>()),
   );
   sl.registerLazySingleton(
     () => AddTransactionCubit(sl<AddTransactionUseCase>()),
