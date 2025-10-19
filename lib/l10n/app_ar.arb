@@ -36,5 +36,7 @@
   "deleteAllShowDialogTitle": "حذف جميع المعاملات",
   "deleteAllShowDialogMessage": "هل أنت متأكد من رغبتك في حذف جميع المعاملات؟",
   "deleteTransaction": "حذف المعاملة",
-  "deleteTransactionMessage": "هل أنت متأكد من رغبتك في حذف هذه المعاملة؟"
+  "deleteTransactionMessage": "هل أنت متأكد من رغبتك في حذف هذه المعاملة؟",
+  "noteOrDescription": "ملاحظه او وصف لالمعامله",
+  "notePrompt": "لا توجد ملاحظه لهذه المعامله"
 }

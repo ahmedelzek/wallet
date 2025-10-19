@@ -39,7 +39,6 @@ class TransactionCubit extends Cubit<TransactionState> {
   Future<void> deleteTransaction(int id) async {
     try {
       if (state is TransactionLoaded) {
-        emit(TransactionLoading());
         await deleteTransactionByIdUseCase(id);
         loadTransactions();
       }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wallet/core/customized_widgets/customized_transaction_card.dart';
+import 'package:wallet/core/customized_widgets/description_show_dialog.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 
 import '../../../l10n/app_translations.dart';
@@ -190,8 +191,13 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ],
                                 ),
-                                child: CustomizedTransactionCard(
-                                  transaction: transaction,
+                                child: InkWell(
+                                  onLongPress: (){
+                                    showDescriptionDialog(context, transaction.note);
+                                  },
+                                  child: CustomizedTransactionCard(
+                                    transaction: transaction,
+                                  ),
                                 ),
                               );
                             },

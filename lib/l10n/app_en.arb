@@ -36,5 +36,7 @@
   "deleteAllShowDialogTitle": "Delete All Transactions",
   "deleteAllShowDialogMessage": "Are you sure you want to delete all transactions?",
   "deleteTransaction": "Delete Transaction",
-  "deleteTransactionMessage": "Are you sure you want to delete this transaction?"
+  "deleteTransactionMessage": "Are you sure you want to delete this transaction?",
+  "noteOrDescription": "Note For Transaction",
+  "notePrompt": "You don't set note for this transaction"
 }
