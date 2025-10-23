@@ -15,6 +15,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
     final model = TransactionModel.fromEntity(transaction);
     await _box.put(model.id, model);
   }
+
   @override
   Future<void> deleteAllTransactions() async {
     await _box.clear();
@@ -23,6 +24,21 @@ class TransactionRepositoryImpl implements TransactionRepository {
   @override
   Future<void> deleteTransaction(int id) async {
     await _box.delete(id);
+  }
+
+  @override
+  Future<List<TransactionEntity>> searchTransactions(String query) async {
+    final models =
+        _box.values
+            .where(
+              (tx) =>
+                  tx.title.toLowerCase().contains(query.toLowerCase()) ||
+                  tx.type.toLowerCase().contains(query.toLowerCase()) ||
+                  tx.note!.toLowerCase().contains(query.toLowerCase()),
+            )
+            .toList();
+
+    return models.map((e) => e.toEntity()).toList();
   }
 
   @override

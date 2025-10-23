@@ -14,6 +14,7 @@ import '../../data/repos/transactions_repository_impl.dart';
 import '../../domain/repos/transactions_repository.dart';
 import '../../domain/use_cases/add_transaction_usecase.dart';
 import '../../domain/use_cases/get_transactions_usecase.dart';
+import '../../domain/use_cases/search_transaction_usecase.dart';
 import '../../domain/use_cases/update_transaction_usecase.dart';
 import '../../features/home_screen/home_page/cubit/transaction_cubit.dart';
 
@@ -36,6 +37,9 @@ Future<void> initDependencies() async {
   );
   sl.registerLazySingleton(
     () => UpdateTransactionUseCase(sl<TransactionRepository>())
+  );
+  sl.registerLazySingleton(
+    () => SearchTransactionUseCase(sl<TransactionRepository>()),
   );
   sl.registerLazySingleton(
     () => UpdateTransactionCubit(sl<UpdateTransactionUseCase>()),
@@ -67,6 +71,7 @@ Future<void> initDependencies() async {
   sl.registerFactory(
     () => TransactionCubit(
       sl<GetTransactionsUseCase>(),
+      sl<SearchTransactionUseCase>(),
       sl<GetIncomeSumUseCase>(),
       sl<GetOutgoingSumUseCase>(),
       sl<GetNetBalanceUseCase>(),

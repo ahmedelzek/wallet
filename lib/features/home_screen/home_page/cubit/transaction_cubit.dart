@@ -5,10 +5,12 @@ import '../../../../domain/use_cases/get_income_sum_usecase.dart';
 import '../../../../domain/use_cases/get_net_balance_usecase.dart';
 import '../../../../domain/use_cases/get_outgoing_sum_usecase.dart';
 import '../../../../domain/use_cases/get_transactions_usecase.dart';
+import '../../../../domain/use_cases/search_transaction_usecase.dart';
 import 'transaction_state.dart';
 
 class TransactionCubit extends Cubit<TransactionState> {
   final GetTransactionsUseCase getTransactionsUseCase;
+  final SearchTransactionUseCase searchTransactionsUseCase;
   final GetIncomeSumUseCase getIncomeSumUseCase;
   final GetOutgoingSumUseCase getOutgoingSumUseCase;
   final GetNetBalanceUseCase getNetBalanceUseCase;
@@ -16,6 +18,7 @@ class TransactionCubit extends Cubit<TransactionState> {
 
   TransactionCubit(
     this.getTransactionsUseCase,
+    this.searchTransactionsUseCase,
     this.getIncomeSumUseCase,
     this.getOutgoingSumUseCase,
     this.getNetBalanceUseCase,
@@ -46,4 +49,19 @@ class TransactionCubit extends Cubit<TransactionState> {
       emit(TransactionError("Failed to delete transaction: $e"));
     }
   }
+
+  Future<void> searchTransactions(String query) async {
+    emit(TransactionLoading());
+    try {
+      final results = await searchTransactionsUseCase(query);
+      final incomeSum = await getIncomeSumUseCase();
+      final outgoingSum = await getOutgoingSumUseCase();
+      final netBalance = await getNetBalanceUseCase();
+
+      emit(TransactionLoaded(results, incomeSum, outgoingSum, netBalance));
+    } catch (e) {
+      emit(TransactionError("Failed to search transactions: $e"));
+    }
+  }
+
 }
