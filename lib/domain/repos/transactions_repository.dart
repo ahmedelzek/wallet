@@ -6,6 +6,7 @@ abstract class TransactionRepository {
   Future<void> deleteTransaction(int id);
   Future<void> deleteAllTransactions();
   Future<List<TransactionEntity>> searchTransactions(String query);
+  Future<List<TransactionEntity>> getTransactionsByType(String type);
   Future<double> getIncomeSum();
   Future<double> getOutgoingSum();
   Future<double> getSavingsSum();

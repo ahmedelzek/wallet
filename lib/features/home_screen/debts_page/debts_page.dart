@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wallet/features/home_screen/debts_page/all_debts_view_page.dart';
+import 'package:wallet/features/home_screen/debts_page/on_pending_debts_view_page.dart';
+import 'package:wallet/features/home_screen/debts_page/paid_debts_view_page.dart';
 
 import '../../../core/resources/app_colors.dart';
 import '../../../l10n/app_translations.dart';
@@ -15,10 +18,14 @@ class DebtsPage extends StatelessWidget {
           title: Padding(
             padding: EdgeInsets.only(top: 10),
             child: TabBar(
-              labelColor: AppColors.green,
-              indicatorColor: AppColors.green,
+              labelColor: AppColors.orange,
+              indicatorColor: AppColors.orange,
               indicatorSize: TabBarIndicatorSize.tab,
-              indicatorWeight: 3,
+              indicatorWeight: 5,
+              labelStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
               tabs: [
                 Tab(text: LocalizationService.instance.tr.tabAll),
                 Tab(text: LocalizationService.instance.tr.tabPending),
@@ -29,9 +36,9 @@ class DebtsPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Center(child: Text(LocalizationService.instance.tr.tabAll)),
-            Center(child: Text(LocalizationService.instance.tr.tabPending)),
-            Center(child: Text(LocalizationService.instance.tr.tabPaid)),
+            Center(child: AllDebtsViewPage()),
+            Center(child: OnPendingDebtsViewPage()),
+            Center(child: PaidDebtsViewPage()),
           ],
         ),
       ),
