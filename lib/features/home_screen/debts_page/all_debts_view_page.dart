@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/core/customized_widgets/customized_transaction_card.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/features/home_screen/debts_page/cubit/debts_state.dart';
+import 'package:wallet/l10n/app_translations.dart';
 
 import 'cubit/debts_cubit.dart';
 
@@ -15,7 +16,6 @@ class AllDebtsViewPage extends StatefulWidget {
 
 class _AllDebtsViewPageState extends State<AllDebtsViewPage> {
   @override
-
   void initState() {
     super.initState();
     context.read<DebtsCubit>().getTransactionsByType('debts');
@@ -28,18 +28,26 @@ class _AllDebtsViewPageState extends State<AllDebtsViewPage> {
       child: BlocBuilder<DebtsCubit, DebtsState>(
         builder: (context, state) {
           if (state is DebtsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.orange),
+            );
           }
 
           if (state is DebtsLoaded) {
             final transactions = state.transactions;
 
             if (transactions.isEmpty) {
-              return const Center(
-                child: Text("No debt transactions found"),
+              return Center(
+                child: Text(
+                  LocalizationService.instance.tr.noDebtsFound,
+                  style: const TextStyle(
+                    color: AppColors.orange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               );
             }
-
             return ListView.separated(
               itemCount: transactions.length,
               separatorBuilder: (_, __) => const SizedBox(height: 10),

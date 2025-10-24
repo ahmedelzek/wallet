@@ -34,7 +34,8 @@ class TransactionRepositoryImpl implements TransactionRepository {
               (tx) =>
                   tx.title.toLowerCase().contains(query.toLowerCase()) ||
                   tx.type.toLowerCase().contains(query.toLowerCase()) ||
-                  tx.note!.toLowerCase().contains(query.toLowerCase()),
+                  (tx.note?.toLowerCase().contains(query.toLowerCase()) ??
+                      false),
             )
             .toList();
 
@@ -52,22 +53,22 @@ class TransactionRepositoryImpl implements TransactionRepository {
     final all = _box.values.toList();
 
     if (type.toLowerCase() == 'debts') {
-      final filtered = all.where((tx) {
-        final t = tx.type.toLowerCase();
-        return t == LocalizationService.instance.tr.debtPaid.toLowerCase() ||
-            t == LocalizationService.instance.tr.debtPending.toLowerCase();
-      }).toList();
+      final filtered =
+          all.where((tx) {
+            final t = tx.type.toLowerCase();
+            return t ==
+                    LocalizationService.instance.tr.debtPaid.toLowerCase() ||
+                t == LocalizationService.instance.tr.debtPending.toLowerCase();
+          }).toList();
 
       return filtered.map((e) => e.toEntity()).toList();
     }
 
-    final filtered = all.where(
-          (tx) => tx.type.toLowerCase() == type.toLowerCase(),
-    ).toList();
+    final filtered =
+        all.where((tx) => tx.type.toLowerCase() == type.toLowerCase()).toList();
 
     return filtered.map((e) => e.toEntity()).toList();
   }
-
 
   Future<double> _getSumOfType(String type) async {
     final transactions = await getAllTransactions();

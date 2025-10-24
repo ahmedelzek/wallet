@@ -104,9 +104,9 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                             _titleController.text.isEmpty ||
                             _amountController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                             SnackBar(
                               content: Text(
-                                'Please fill all required fields',
+                                LocalizationService.instance.tr.addRequiredFields,
                               ),
                             ),
                           );

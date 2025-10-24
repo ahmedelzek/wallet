@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wallet/features/home_screen/home_page/cubit/transaction_cubit.dart';
 import 'package:wallet/features/home_screen/home_page/cubit/transaction_state.dart';
 
+import '../../../core/customized_widgets/customized_slidable_border_radius.dart';
 import '../../../core/customized_widgets/customized_transaction_card.dart';
 import '../../../core/customized_widgets/description_show_dialog.dart';
 import '../../../core/resources/app_colors.dart';
@@ -66,7 +67,19 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 Expanded(
                   child:
                       state.transactions.isEmpty
-                          ? const Center(child: Text("No transactions yet"))
+                          ? Center(
+                            child: Text(
+                              LocalizationService
+                                  .instance
+                                  .tr
+                                  .noTransactionsFound,
+                              style: const TextStyle(
+                                color: AppColors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          )
                           : ListView.separated(
                             itemCount: state.transactions.length,
                             separatorBuilder:
@@ -87,10 +100,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       backgroundColor: AppColors.red,
                                       foregroundColor: AppColors.white,
                                       icon: Icons.delete,
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: customizedSlidAbleBorderRadius(context),
                                       label:
                                           LocalizationService
                                               .instance

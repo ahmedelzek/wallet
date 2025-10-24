@@ -18,8 +18,11 @@ class _PaidDebtsViewPageState extends State<PaidDebtsViewPage> {
   @override
   void initState() {
     super.initState();
-    context.read<DebtsCubit>().getTransactionsByType(LocalizationService.instance.tr.debtPaid);
+    context.read<DebtsCubit>().getTransactionsByType(
+      LocalizationService.instance.tr.debtPaid,
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,15 +30,24 @@ class _PaidDebtsViewPageState extends State<PaidDebtsViewPage> {
       child: BlocBuilder<DebtsCubit, DebtsState>(
         builder: (context, state) {
           if (state is DebtsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.orange),
+            );
           }
 
           if (state is DebtsLoaded) {
             final transactions = state.transactions;
 
             if (transactions.isEmpty) {
-              return const Center(
-                child: Text("No debt transactions found"),
+              return Center(
+                child: Text(
+                  LocalizationService.instance.tr.noDebtsFound,
+                  style: const TextStyle(
+                    color: AppColors.orange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               );
             }
 

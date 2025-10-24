@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           LocalizationService.instance.update(context);
           return child!;
         },
-        locale: const Locale('en'),
+        locale: const Locale('ar'),
         initialRoute: HomeScreen.routeName,
         routes: {
           HomeScreen.routeName: (context) => const HomeScreen(),

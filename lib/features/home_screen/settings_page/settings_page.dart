@@ -24,18 +24,18 @@ class _SettingsPageState extends State<SettingsPage> {
         listener: (context, state) {
           if (state is DeleteLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Deleting all transactions...'),
+               SnackBar(
+                content: Text(LocalizationService.instance.tr.deletingAllTransactions),
                 duration: Duration(seconds: 1),
               ),
             );
           } else if (state is DeleteSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('All transactions deleted!')),
+               SnackBar(content: Text(LocalizationService.instance.tr.deleteAllTransactionsSuccessfully)),
             );
           } else if (state is DeleteFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Failed to delete transactions.')),
+               SnackBar(content: Text(LocalizationService.instance.tr.failedToDeleteTransactions)),
             );
           }
         },

@@ -19,7 +19,7 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(12),
-      height: 100,
+      height: 120,
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.lightGrey2,
@@ -51,7 +51,7 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
                   ),
                 ),
                 Text(
-                  "${widget.transaction.amount.toString()} EGP",
+                  "${widget.transaction.amount.toString()} ${LocalizationService.instance.tr.balanceCurrency}",
                   style: TextStyle(
                     color: _setColor(widget.transaction.type),
                     fontWeight: FontWeight.bold,

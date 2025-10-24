@@ -39,5 +39,14 @@
   "deleteTransactionMessage": "Are you sure you want to delete this transaction?",
   "noteOrDescription": "Note For Transaction",
   "notePrompt": "You don't set note for this transaction",
-  "search": "Search"
+  "search": "Search",
+  "noTransactionsFound": "No Transactions Found",
+  "noDebtsFound": "No Debts Found",
+  "addRequiredFields": "Please fill all required fields",
+  "transactionAddedSuccessfully": "Transaction Added Successfully",
+  "transactionDeletedSuccessfully": "Transaction Deleted Successfully",
+  "transactionEditedSuccessfully": "Transaction Edited Successfully",
+  "deletingAllTransactions": "Deleting all transactions...'",
+  "deleteAllTransactionsSuccessfully": "All Transactions Deleted Successfully",
+  "failedToDeleteTransactions": "Failed to delete transactions"
 }

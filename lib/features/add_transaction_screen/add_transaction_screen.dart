@@ -43,7 +43,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
         listener: (context, state) {
           if (state is AddTransactionSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Transaction added successfully')),
+              SnackBar(content: Text(LocalizationService.instance.tr.transactionAddedSuccessfully)),
             );
             _titleController.clear();
             _amountController.clear();
@@ -93,9 +93,9 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                             _titleController.text.isEmpty ||
                             _amountController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                             SnackBar(
                               content: Text(
-                                'Please fill all required fields',
+                                LocalizationService.instance.tr.addRequiredFields,
                               ),
                             ),
                           );

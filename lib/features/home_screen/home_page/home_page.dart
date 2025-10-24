@@ -5,6 +5,7 @@ import 'package:wallet/core/customized_widgets/customized_transaction_card.dart'
 import 'package:wallet/core/customized_widgets/description_show_dialog.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 
+import '../../../core/customized_widgets/customized_slidable_border_radius.dart';
 import '../../../l10n/app_translations.dart';
 import '../../add_transaction_screen/add_transaction_screen.dart';
 import '../../update_transaction_screen/update_transaction_screen.dart';
@@ -144,7 +145,19 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child:
                       state.transactions.isEmpty
-                          ? const Center(child: Text("No transactions yet"))
+                          ? Center(
+                            child: Text(
+                              LocalizationService
+                                  .instance
+                                  .tr
+                                  .noTransactionsFound,
+                              style: const TextStyle(
+                                color: AppColors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          )
                           : ListView.separated(
                             itemCount: state.transactions.length,
 
@@ -157,15 +170,14 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     SlidableAction(
                                       onPressed: (_) {
-                                          context.read<TransactionCubit>().deleteTransaction(transaction.id);
+                                        context
+                                            .read<TransactionCubit>()
+                                            .deleteTransaction(transaction.id);
                                       },
                                       backgroundColor: AppColors.red,
                                       foregroundColor: AppColors.white,
                                       icon: Icons.delete,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
-                                      ),
+                                      borderRadius: customizedSlidAbleBorderRadius(context),
                                       label:
                                           LocalizationService
                                               .instance
@@ -184,16 +196,16 @@ class _HomePageState extends State<HomePage> {
                                       foregroundColor: AppColors.white,
                                       icon: Icons.edit,
                                       label:
-                                          LocalizationService
-                                              .instance
-                                              .tr
-                                              .edit,
+                                          LocalizationService.instance.tr.edit,
                                     ),
                                   ],
                                 ),
                                 child: InkWell(
-                                  onLongPress: (){
-                                    showDescriptionDialog(context, transaction.note);
+                                  onLongPress: () {
+                                    showDescriptionDialog(
+                                      context,
+                                      transaction.note,
+                                    );
                                   },
                                   child: CustomizedTransactionCard(
                                     transaction: transaction,
