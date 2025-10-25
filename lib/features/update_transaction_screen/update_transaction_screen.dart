@@ -7,6 +7,7 @@ import '../../core/customized_widgets/customized_text_fields.dart';
 import '../../core/customized_widgets/customized_type_drop_down.dart';
 import '../../core/di/injector.dart';
 import '../../core/resources/app_colors.dart';
+import '../../core/resources/transaction_types.dart';
 import '../../domain/use_cases/update_transaction_usecase.dart';
 import '../home_screen/home_page/cubit/transaction_cubit.dart';
 import 'cubit/update_transaction_cubit.dart';
@@ -27,7 +28,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
-  String? _selectedType;
+  TransactionType? _selectedType;
 
   late TransactionEntity transaction;
   bool _isInitialized = false;
@@ -41,7 +42,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
       _titleController.text = transaction.title;
       _amountController.text = transaction.amount.toString();
       _noteController.text = transaction.note ?? '';
-      _selectedType = transaction.type;
+      _selectedType = TransactionTypeExtension.fromKey(transaction.type);
       _isInitialized = true;
     }
   }
@@ -63,7 +64,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
           backgroundColor: AppColors.white,
           centerTitle: true,
           title: Text(
-            'Update Transaction',
+            LocalizationService.instance.tr.updateTransaction,
             style: TextStyle(color: AppColors.blue),
           ),
         ),
@@ -71,7 +72,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
           listener: (context, state) {
             if (state is UpdateSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Transaction updated successfully')),
+                 SnackBar(content: Text(LocalizationService.instance.tr.updatedSuccess)),
               );
               context.read<TransactionCubit>().loadTransactions();
               Navigator.pop(context);
@@ -119,7 +120,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                           note: _noteController.text.isEmpty
                               ? null
                               : _noteController.text,
-                          type: _selectedType!,
+                          type: _selectedType!.key,
                         );
                         context
                             .read<UpdateTransactionCubit>()

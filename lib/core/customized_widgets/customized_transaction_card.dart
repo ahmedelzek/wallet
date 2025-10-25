@@ -3,6 +3,7 @@ import 'package:wallet/domain/entities/transactions_entities.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
 import '../resources/app_colors.dart';
+import '../resources/transaction_types.dart'; // <-- make sure this path is correct in your project
 
 class CustomizedTransactionCard extends StatefulWidget {
   final TransactionEntity transaction;
@@ -17,8 +18,13 @@ class CustomizedTransactionCard extends StatefulWidget {
 class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
   @override
   Widget build(BuildContext context) {
+    final typeEnum = TransactionTypeExtension.fromKey(widget.transaction.type);
+
+    final localizedType = typeEnum.getLocalizedName();
+    final color = typeEnum.color;
+
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       height: 120,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -28,15 +34,15 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: double.infinity,
             width: 4,
             decoration: BoxDecoration(
-              color: _setColor(widget.transaction.type),
+              color: color,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               spacing: 4,
@@ -46,21 +52,21 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
                 Text(
                   widget.transaction.title,
                   style: TextStyle(
-                    color: _setColor(widget.transaction.type),
+                    color: color,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   "${widget.transaction.amount.toString()} ${LocalizationService.instance.tr.balanceCurrency}",
                   style: TextStyle(
-                    color: _setColor(widget.transaction.type),
+                    color: color,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  widget.transaction.type,
+                  localizedType,
                   style: TextStyle(
-                    color: _setColor(widget.transaction.type),
+                    color: color,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -71,18 +77,4 @@ class _CustomizedTransactionCardState extends State<CustomizedTransactionCard> {
       ),
     );
   }
-}
-
-Color _setColor(String type) {
-  if (type == LocalizationService.instance.tr.income) {
-    return AppColors.green;
-  } else if (type == LocalizationService.instance.tr.outgoing) {
-    return AppColors.red;
-  } else if (type == LocalizationService.instance.tr.savings) {
-    return AppColors.blue;
-  } else if (type == LocalizationService.instance.tr.debtPaid ||
-      type == LocalizationService.instance.tr.debtPending) {
-    return AppColors.orange;
-  }
-  return AppColors.grey;
 }

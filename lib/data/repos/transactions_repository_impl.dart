@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:wallet/core/resources/transaction_types.dart';
 
 import '../../domain/entities/transactions_entities.dart';
 import '../../domain/repos/transactions_repository.dart';
@@ -79,23 +80,22 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   Future<double> getIncomeSum() =>
-      _getSumOfType(LocalizationService.instance.tr.income);
+      _getSumOfType(TransactionType.income.key);
 
   @override
   Future<double> getOutgoingSum() =>
-      _getSumOfType(LocalizationService.instance.tr.outgoing);
+      _getSumOfType(TransactionType.outgoing.key);
 
   @override
-  Future<double> getSavingsSum() =>
-      _getSumOfType(LocalizationService.instance.tr.savings);
+  Future<double> getSavingsSum() => _getSumOfType(TransactionType.savings.key);
 
   @override
   Future<double> getDebtPendingSum() =>
-      _getSumOfType(LocalizationService.instance.tr.debtPending);
+      _getSumOfType(TransactionType.debtPending.key);
 
   @override
   Future<double> getDebtPaidSum() =>
-      _getSumOfType(LocalizationService.instance.tr.debtPaid);
+      _getSumOfType(TransactionType.debtPaid.key);
 
   @override
   Future<double> getNetBalance() async {

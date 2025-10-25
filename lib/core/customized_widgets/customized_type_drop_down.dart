@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../l10n/app_translations.dart';
 import '../resources/app_colors.dart';
-import '../resources/color_list.dart';
+import '../resources/transaction_types.dart';
 
-Widget customizedTypeDropDown(String? selectedType, Function(String?) onChanged){
+Widget customizedTypeDropDown(TransactionType? selectedType, Function(TransactionType?) onChanged) {
   return Container(
     height: 50,
     width: double.infinity,
@@ -13,18 +12,18 @@ Widget customizedTypeDropDown(String? selectedType, Function(String?) onChanged)
       color: AppColors.lightGrey,
       borderRadius: BorderRadius.circular(10),
     ),
-    child: DropdownButton<String>(
+    child: DropdownButton<TransactionType>(
       key: ValueKey(selectedType),
       isExpanded: true,
       hint: Text(LocalizationService.instance.tr.selectTransactionType),
       value: selectedType,
-      items: typeColors.keys.map((String type) {
-        return DropdownMenuItem<String>(
+      items: TransactionType.values.map((type) {
+        return DropdownMenuItem<TransactionType>(
           value: type,
           child: Text(
-            type,
+            type.getLocalizedName(),
             style: TextStyle(
-              color: typeColors[type],
+              color: type.color,
               fontWeight: FontWeight.bold,
             ),
           ),

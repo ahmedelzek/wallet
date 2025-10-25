@@ -7,6 +7,7 @@ import 'package:wallet/core/resources/app_colors.dart';
 import '../../../domain/entities/transactions_entities.dart';
 import '../../../domain/use_cases/add_transaction_usecase.dart';
 import '../../../l10n/app_translations.dart';
+import '../../core/resources/transaction_types.dart';
 import '../home_screen/home_page/cubit/transaction_cubit.dart';
 import 'cubit/add_transaction_state.dart';
 import 'cubit/add_transactions_cubit.dart';
@@ -25,7 +26,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
-  String? _selectedType;
+  TransactionType? _selectedType;
 
   @override
   void dispose() {
@@ -108,7 +109,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                           note: _noteController.text.isEmpty
                               ? null
                               : _noteController.text,
-                          type: _selectedType!,
+                          type: _selectedType!.key,
                         );
                          context
                             .read<AddTransactionCubit>()

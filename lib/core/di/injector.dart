@@ -19,6 +19,7 @@ import '../../domain/use_cases/search_transaction_usecase.dart';
 import '../../domain/use_cases/update_transaction_usecase.dart';
 import '../../features/home_screen/debts_page/cubit/debts_cubit.dart';
 import '../../features/home_screen/home_page/cubit/transaction_cubit.dart';
+import '../../features/home_screen/settings_page/cubit/language_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -27,6 +28,11 @@ Future<void> initDependencies() async {
   Hive.registerAdapter(TransactionModelAdapter());
 
   final transactionBox = await Hive.openBox<TransactionModel>('transactions');
+  await Hive.openBox('settings');
+
+  final languageCubit = LanguageCubit();
+  await languageCubit.loadLanguage();
+  sl.registerSingleton<LanguageCubit>(languageCubit);
 
   sl.registerLazySingleton<Box<TransactionModel>>(() => transactionBox);
 

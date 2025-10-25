@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/resources/app_colors.dart';
+import '../../features/home_screen/settings_page/cubit/language_cubit.dart';
 import '../../l10n/app_translations.dart';
 import 'home_widgets.dart';
 
@@ -28,35 +29,39 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: taps[selectedIndex],
-        bottomNavigationBar: Container(
-          margin: EdgeInsets.symmetric(vertical: 14, horizontal: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            border: Border.all(width: 8, color: AppColors.transparentGreen)
-          ),
-          child: BottomNavigationBar(
-              selectedLabelStyle: const TextStyle(
-                fontSize: 12, // Fixed font size
-                fontWeight: FontWeight.w500,
+
+        bottomNavigationBar: BlocBuilder<LanguageCubit, Locale>(
+          builder: (context, locale) {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                border: Border.all(width: 8, color: AppColors.transparentGreen),
               ),
-              unselectedLabelStyle: const TextStyle(
-                fontSize: 12, // Same as selected
-                fontWeight: FontWeight.w500,
+              child: BottomNavigationBar(
+                selectedLabelStyle: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+                iconSize: 32,
+                selectedItemColor: AppColors.green,
+                unselectedItemColor: Colors.grey,
+                onTap: changeTab,
+                type: BottomNavigationBarType.fixed,
+                currentIndex: selectedIndex,
+                items: generateBottomNavItems({
+                  Icons.home: LocalizationService.instance.tr.home,
+                  Icons.library_books_sharp: LocalizationService.instance.tr.transactions,
+                  Icons.wallet: LocalizationService.instance.tr.debts,
+                  Icons.settings: LocalizationService.instance.tr.settings,
+                }),
               ),
-              iconSize: 32,
-              selectedItemColor: AppColors.green,
-              unselectedItemColor: Colors.grey,
-              onTap: (index) {
-                changeTab(index);
-              },
-              type: BottomNavigationBarType.fixed,
-              currentIndex: selectedIndex,
-              items: generateBottomNavItems({
-                Icons.home: LocalizationService.instance.tr.home,
-                Icons.library_books_sharp: LocalizationService.instance.tr.transactions,
-                Icons.wallet: LocalizationService.instance.tr.debts,
-                Icons.settings: LocalizationService.instance.tr.settings,
-              })),
+            );
+          },
         ),
       ),
     );

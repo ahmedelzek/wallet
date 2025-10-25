@@ -48,5 +48,8 @@
   "transactionEditedSuccessfully": "Transaction Edited Successfully",
   "deletingAllTransactions": "Deleting all transactions...'",
   "deleteAllTransactionsSuccessfully": "All Transactions Deleted Successfully",
-  "failedToDeleteTransactions": "Failed to delete transactions"
+  "failedToDeleteTransactions": "Failed to delete transactions",
+  "updateTransaction": "Update Transaction",
+  "updatedSuccess": "Transaction Updated Successfully",
+  "failedToUpdateTransaction": "Failed to update transaction"
 }
