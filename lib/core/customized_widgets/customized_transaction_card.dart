@@ -3,7 +3,7 @@ import 'package:wallet/domain/entities/transactions_entities.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
 import '../resources/app_colors.dart';
-import '../resources/transaction_types.dart'; // <-- make sure this path is correct in your project
+import '../resources/transaction_types.dart';
 
 class CustomizedTransactionCard extends StatefulWidget {
   final TransactionEntity transaction;
