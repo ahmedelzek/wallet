@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/customized_widgets/customized_transaction_card.dart';
 import '../../../core/resources/app_colors.dart';
+import '../../../core/resources/transaction_types.dart';
 import '../../../l10n/app_translations.dart';
 import 'cubit/debts_cubit.dart';
 import 'cubit/debts_state.dart';
@@ -19,7 +20,7 @@ class _PaidDebtsViewPageState extends State<PaidDebtsViewPage> {
   void initState() {
     super.initState();
     context.read<DebtsCubit>().getTransactionsByType(
-      LocalizationService.instance.tr.debtPaid,
+      TransactionType.debtPaid.key
     );
   }
 

@@ -3,7 +3,6 @@ import 'package:wallet/core/resources/transaction_types.dart';
 
 import '../../domain/entities/transactions_entities.dart';
 import '../../domain/repos/transactions_repository.dart';
-import '../../l10n/app_translations.dart';
 import '../models/transactions_model.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
@@ -54,19 +53,16 @@ class TransactionRepositoryImpl implements TransactionRepository {
     final all = _box.values.toList();
 
     if (type.toLowerCase() == 'debts') {
-      final filtered =
-          all.where((tx) {
-            final t = tx.type.toLowerCase();
-            return t ==
-                    LocalizationService.instance.tr.debtPaid.toLowerCase() ||
-                t == LocalizationService.instance.tr.debtPending.toLowerCase();
-          }).toList();
+      final filtered = all.where((tx) {
+        final t = tx.type.toLowerCase();
+        return t == TransactionType.debtPaid.key.toLowerCase() ||
+            t == TransactionType.debtPending.key.toLowerCase();
+      }).toList();
 
       return filtered.map((e) => e.toEntity()).toList();
     }
 
-    final filtered =
-        all.where((tx) => tx.type.toLowerCase() == type.toLowerCase()).toList();
+    final filtered = all.where((tx) => tx.type.toLowerCase() == type.toLowerCase()).toList();
 
     return filtered.map((e) => e.toEntity()).toList();
   }

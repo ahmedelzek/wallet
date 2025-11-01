@@ -4,6 +4,7 @@ import 'package:wallet/l10n/app_translations.dart';
 
 import '../../../core/customized_widgets/customized_transaction_card.dart';
 import '../../../core/resources/app_colors.dart';
+import '../../../core/resources/transaction_types.dart';
 import 'cubit/debts_cubit.dart';
 import 'cubit/debts_state.dart';
 
@@ -19,7 +20,7 @@ class _OnPendingDebtsViewPageState extends State<OnPendingDebtsViewPage> {
   void initState() {
     super.initState();
     context.read<DebtsCubit>().getTransactionsByType(
-      LocalizationService.instance.tr.debtPending,
+      TransactionType.debtPending.key
     );
   }
 
