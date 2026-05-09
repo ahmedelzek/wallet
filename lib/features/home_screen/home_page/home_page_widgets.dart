@@ -34,6 +34,7 @@ Widget balanceCard(String title, String amount, IconData icon, Color color) {
           color: color,
           size: 20,
         ),
+        SizedBox(width: 10,),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -4,7 +4,7 @@ import 'package:wallet/domain/repos/transactions_repository.dart';
 class GetTransactionsByTypeUseCase {
   final TransactionRepository repository;
 
-  GetTransactionsByTypeUseCase(this.repository);
+  GetTransactionsByTypeUseCase({required this.repository});
 
   Future<List<TransactionEntity>> call(String type) async {
     return repository.getTransactionsByType(type);

@@ -8,7 +8,7 @@ import '../../../../domain/use_cases/get_transactions_usecase.dart';
 import '../../../../domain/use_cases/search_transaction_usecase.dart';
 import 'transaction_state.dart';
 
-class TransactionCubit extends Cubit<TransactionState> {
+class HomeCubit extends Cubit<HomeState> {
   final GetTransactionsUseCase getTransactionsUseCase;
   final SearchTransactionUseCase searchTransactionsUseCase;
   final GetIncomeSumUseCase getIncomeSumUseCase;
@@ -16,51 +16,51 @@ class TransactionCubit extends Cubit<TransactionState> {
   final GetNetBalanceUseCase getNetBalanceUseCase;
   final DeleteTransactionByIdUseCase deleteTransactionByIdUseCase;
 
-  TransactionCubit(
+  HomeCubit(
     this.getTransactionsUseCase,
     this.searchTransactionsUseCase,
     this.getIncomeSumUseCase,
     this.getOutgoingSumUseCase,
     this.getNetBalanceUseCase,
     this.deleteTransactionByIdUseCase,
-  ) : super(TransactionInitial());
+  ) : super(HomeInitialState());
 
   Future<void> loadTransactions() async {
-    emit(TransactionLoading());
+    emit(HomeLoadingState());
     try {
       final transactions = await getTransactionsUseCase();
       final incomeSum = await getIncomeSumUseCase();
       final outgoingSum = await getOutgoingSumUseCase();
       final netBalance = await getNetBalanceUseCase();
 
-      emit(TransactionLoaded(transactions, incomeSum, outgoingSum, netBalance));
+      emit(HomeSuccessState(transactions, incomeSum, outgoingSum, netBalance));
     } catch (e) {
-      emit(TransactionError("Failed to load transactions: $e"));
+      emit(HomeErrorState("Failed to load transactions: $e"));
     }
   }
 
   Future<void> deleteTransaction(int id) async {
     try {
-      if (state is TransactionLoaded) {
+      if (state is HomeSuccessState) {
         await deleteTransactionByIdUseCase(id);
         loadTransactions();
       }
     } catch (e) {
-      emit(TransactionError("Failed to delete transaction: $e"));
+      emit(HomeErrorState("Failed to delete transaction: $e"));
     }
   }
 
   Future<void> searchTransactions(String query) async {
-    emit(TransactionLoading());
+    emit(HomeLoadingState());
     try {
       final results = await searchTransactionsUseCase(query);
       final incomeSum = await getIncomeSumUseCase();
       final outgoingSum = await getOutgoingSumUseCase();
       final netBalance = await getNetBalanceUseCase();
 
-      emit(TransactionLoaded(results, incomeSum, outgoingSum, netBalance));
+      emit(HomeSuccessState(results, incomeSum, outgoingSum, netBalance));
     } catch (e) {
-      emit(TransactionError("Failed to search transactions: $e"));
+      emit(HomeErrorState("Failed to search transactions: $e"));
     }
   }
 

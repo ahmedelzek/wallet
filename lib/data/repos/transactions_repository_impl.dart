@@ -6,30 +6,30 @@ import '../../domain/repos/transactions_repository.dart';
 import '../models/transactions_model.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
-  final Box<TransactionModel> _box;
+  final Box<TransactionModel> box;
 
-  TransactionRepositoryImpl(this._box);
+  TransactionRepositoryImpl({required this.box});
 
   @override
   Future<void> addOrUpdateTransaction(TransactionEntity transaction) async {
     final model = TransactionModel.fromEntity(transaction);
-    await _box.put(model.id, model);
+    await box.put(model.id, model);
   }
 
   @override
   Future<void> deleteAllTransactions() async {
-    await _box.clear();
+    await box.clear();
   }
 
   @override
   Future<void> deleteTransaction(int id) async {
-    await _box.delete(id);
+    await box.delete(id);
   }
 
   @override
   Future<List<TransactionEntity>> searchTransactions(String query) async {
     final models =
-        _box.values
+        box.values
             .where(
               (tx) =>
                   tx.title.toLowerCase().contains(query.toLowerCase()) ||
@@ -44,13 +44,13 @@ class TransactionRepositoryImpl implements TransactionRepository {
 
   @override
   Future<List<TransactionEntity>> getAllTransactions() async {
-    final models = _box.values.toList();
+    final models = box.values.toList();
     return models.map((e) => e.toEntity()).toList();
   }
 
   @override
   Future<List<TransactionEntity>> getTransactionsByType(String type) async {
-    final all = _box.values.toList();
+    final all = box.values.toList();
 
     if (type.toLowerCase() == 'debts') {
       final filtered = all.where((tx) {

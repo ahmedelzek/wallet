@@ -30,21 +30,14 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
 
   TransactionType? _selectedType;
 
-  late TransactionEntity transaction;
+  //late TransactionEntity transaction;
   bool _isInitialized = false;
 
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (!_isInitialized) {
-      transaction = ModalRoute.of(context)!.settings.arguments as TransactionEntity;
-      _titleController.text = transaction.title;
-      _amountController.text = transaction.amount.toString();
-      _noteController.text = transaction.note ?? '';
-      _selectedType = TransactionTypeExtension.fromKey(transaction.type);
-      _isInitialized = true;
-    }
+
   }
 
   @override
@@ -74,7 +67,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                  SnackBar(content: Text(LocalizationService.instance.tr.updatedSuccess)),
               );
-              context.read<TransactionCubit>().loadTransactions();
+              context.read<HomeCubit>().loadTransactions();
               Navigator.pop(context);
             } else if (state is UpdateError) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -89,14 +82,12 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                 child: Column(
                   spacing: 35,
                   children: [
-                    customizedTypeDropDown(_selectedType, (value) {
+                   /* CustomizedTypeDropDown(_selectedType, (value) {
                       setState(() {
                         _selectedType = value;
                       });
-                    }),
-                    customizedTitleTextFormField(_titleController),
-                    customizedAmountTextFormField(_amountController),
-                    customizedDescriptionTextFormField(_noteController),
+                    }),*/
+
                     ElevatedButton(
                       onPressed: state is UpdateLoading
                           ? null
@@ -114,7 +105,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                           return;
                         }
                         final updatedTransaction = TransactionEntity(
-                          id: transaction.id,
+                          id: 00,
                           title: _titleController.text,
                           amount: double.tryParse(_amountController.text) ?? 0.0,
                           note: _noteController.text.isEmpty

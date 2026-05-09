@@ -1,25 +1,17 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
-class LanguageCubit extends Cubit<Locale> {
-  static const String _boxName = 'settings';
-  static const String _langKey = 'lang';
+class LocaleCubit extends Cubit<Locale> {
+  LocaleCubit() : super(const Locale('en'));
 
-  LanguageCubit() : super(const Locale('en')) {
-    loadLanguage();
-  }
+  void setEnglish() => emit(const Locale('en'));
+  void setArabic() => emit(const Locale('ar'));
 
-  Future<void> loadLanguage() async {
-    final box = Hive.box(_boxName);
-    final langCode = box.get(_langKey, defaultValue: 'en');
-    emit(Locale(langCode));
-  }
-
-  Future<void> changeLanguage(String langCode) async {
-    final box = Hive.box(_boxName);
-    await box.put(_langKey, langCode);
-    emit(Locale(langCode));
+  void toggle() {
+    if (state.languageCode == 'en') {
+      setArabic();
+    } else {
+      setEnglish();
+    }
   }
 }

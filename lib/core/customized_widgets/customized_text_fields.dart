@@ -1,63 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../l10n/app_translations.dart';
-import '../resources/app_colors.dart';
+class CustomizedTextField extends StatelessWidget {
+  final String? hintText;
+  final String? prefixIcon;
+  final bool isNum;
+  final bool isNote;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final Function()? onTap;
 
-Widget customizedTitleTextFormField(TextEditingController titleController){
-  return Container(
-    padding: const EdgeInsets.all(6),
-    decoration: BoxDecoration(
-      color: AppColors.lightGrey,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: TextFormField(
-      controller: titleController,
+  const CustomizedTextField({
+    super.key,
+    required this.hintText,
+    this.prefixIcon,
+    this.controller,
+    this.validator,
+    this.onTap,
+    this.isNum = false,
+    this.isNote = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      validator: validator,
+      onTap: onTap,
+      minLines: isNote ? 3 : 1,
+      maxLines: isNote ? 5 : 1,
+      keyboardType: !isNum ? TextInputType.multiline : TextInputType.number,
       decoration: InputDecoration(
-        hintText: LocalizationService.instance.tr.enterTitle,
-        border: InputBorder.none,
+        hintText: hintText,
+        filled: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
       ),
-    ),
-  );
-}
-
-Widget customizedAmountTextFormField(TextEditingController amountController){
-  return Container(
-    padding: const EdgeInsets.all(6),
-    decoration: BoxDecoration(
-      color: AppColors.lightGrey,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: TextFormField(
-      controller: amountController,
-      keyboardType: TextInputType.number,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-      ],
-      decoration: InputDecoration(
-        hintText: LocalizationService.instance.tr.enterAmount,
-        border: InputBorder.none,
-      ),
-    ),
-  );
-}
-
-Widget customizedDescriptionTextFormField(TextEditingController noteController){
-  return Container(
-    padding: const EdgeInsets.all(6),
-    decoration: BoxDecoration(
-      color: AppColors.lightGrey,
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: TextFormField(
-      controller: noteController,
-      minLines: 6,
-      maxLines: 10,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText:
-        LocalizationService.instance.tr.enterDescriptionOrNote,
-      ),
-    ),
-  );
+    );
+  }
 }

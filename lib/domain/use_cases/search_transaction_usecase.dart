@@ -4,7 +4,7 @@ import 'package:wallet/domain/repos/transactions_repository.dart';
 class SearchTransactionUseCase {
   final TransactionRepository repository;
 
-  SearchTransactionUseCase(this.repository);
+  SearchTransactionUseCase({required this.repository});
   Future<List<TransactionEntity>> call(String query) async {
     return repository.searchTransactions(query);
   }

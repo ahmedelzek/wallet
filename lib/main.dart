@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:wallet/features/home_screen/debts_page/cubit/debts_cubit.dart';
-import 'package:wallet/features/home_screen/settings_page/cubit/delete_cubit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wallet/core/app_router/app_router.dart';
 
 import 'core/di/injector.dart';
 import 'core/resources/app_theme.dart';
-import 'features/add_transaction_screen/add_transaction_screen.dart';
-import 'features/add_transaction_screen/cubit/add_transactions_cubit.dart';
-import 'features/home_screen/home_page/cubit/transaction_cubit.dart';
-import 'features/home_screen/home_screen.dart';
 import 'features/home_screen/settings_page/cubit/language_cubit.dart';
-import 'features/update_transaction_screen/cubit/update_transaction_cubit.dart';
-import 'features/update_transaction_screen/update_transaction_screen.dart';
 import 'l10n/app_translations.dart';
 
 Future<void> main() async {
@@ -32,36 +26,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => sl<AddTransactionCubit>()),
-        BlocProvider(create: (_) => sl<TransactionCubit>()..loadTransactions()),
-        BlocProvider(create: (_) => sl<DeleteAllCubit>()),
-        BlocProvider(create: (_) => sl<UpdateTransactionCubit>()),
-        BlocProvider(create: (_) => sl<DebtsCubit>()),
-        BlocProvider(create: (_) => sl<LanguageCubit>()),
+        BlocProvider(create: (_) => LocaleCubit()),
       ],
-      child: BlocBuilder<LanguageCubit, Locale>(
-        builder: (context, locale) {
-          return MaterialApp(
-            theme: AppTheme.lightTheme,
-            title: 'Wallet',
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: locale,
-            builder: (context, child) {
-              LocalizationService.instance.update(context);
-              return child!;
-            },
-            initialRoute: HomeScreen.routeName,
-            routes: {
-              HomeScreen.routeName: (context) => const HomeScreen(),
-              AddTransactionScreen.routeName:
-                  (context) => AddTransactionScreen(),
-              UpdateTransactionScreen.routeName:
-                  (context) => UpdateTransactionScreen(),
-            },
-          );
-        },
-      ),
+      child: BlocBuilder<LocaleCubit, Locale>(
+          builder: (context, locale) {
+            return ScreenUtilInit(
+              designSize: Size(375, 812),
+              child: MaterialApp.router(
+                theme: AppTheme.lightTheme,
+                title: 'Wallet',
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: locale,
+                builder: (context, child) {
+                  LocalizationService.instance.update(context);
+                  return child!;
+                },
+                routerConfig: appRouter,
+              ),
+            );
+          },
+        ),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:wallet/domain/repos/transactions_repository.dart';
 
 class UpdateTransactionUseCase{
   final TransactionRepository repository ;
-  UpdateTransactionUseCase(this.repository);
+  UpdateTransactionUseCase({required this.repository});
 
   Future<void> call(TransactionEntity transaction) async{
     await repository.addOrUpdateTransaction(transaction);

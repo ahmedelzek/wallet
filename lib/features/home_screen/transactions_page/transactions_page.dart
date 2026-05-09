@@ -26,7 +26,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   void _onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 100), () {
-      context.read<TransactionCubit>().searchTransactions(query);
+      context.read<HomeCubit>().searchTransactions(query);
     });
   }
 
@@ -40,15 +40,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: BlocBuilder<TransactionCubit, TransactionState>(
+      child: BlocBuilder<HomeCubit, HomeState>(
         builder: (BuildContext context, state) {
-          if (state is TransactionLoading) {
+          if (state is HomeLoadingState) {
             return const Center(
               child: CircularProgressIndicator(color: AppColors.green),
             );
           }
 
-          if (state is TransactionLoaded) {
+          if (state is HomeSuccessState) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -94,7 +94,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                     SlidableAction(
                                       onPressed: (_) {
                                         context
-                                            .read<TransactionCubit>()
+                                            .read<HomeCubit>()
                                             .deleteTransaction(transaction.id);
                                       },
                                       backgroundColor: AppColors.red,
@@ -142,7 +142,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
             );
           }
 
-          if (state is TransactionError) {
+          if (state is HomeErrorState) {
             return Center(child: Text(state.message));
           }
 

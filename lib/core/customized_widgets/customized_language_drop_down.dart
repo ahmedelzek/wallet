@@ -16,7 +16,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<LanguageCubit>();
+    final cubit = context.watch<LocaleCubit>();
     final currentLang = cubit.state.languageCode;
 
     final Map<String, String> languages = {'en': 'English', 'ar': 'العربية'};
@@ -45,7 +45,9 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
           }).toList(),
       onChanged: (value) {
         if (value != null) {
-          context.read<LanguageCubit>().changeLanguage(value);
+          value == 'en'
+              ? context.read<LocaleCubit>().setEnglish()
+              : context.read<LocaleCubit>().setArabic();
         }
       },
     );

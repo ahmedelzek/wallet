@@ -1,18 +1,18 @@
 import '../../../../domain/entities/transactions_entities.dart';
 
-abstract class TransactionState {}
+abstract class HomeState {}
 
-class TransactionInitial extends TransactionState {}
+class HomeInitialState extends HomeState {}
 
-class TransactionLoading extends TransactionState {}
+class HomeLoadingState extends HomeState {}
 
-class TransactionLoaded extends TransactionState {
+class HomeSuccessState extends HomeState {
   final List<TransactionEntity> transactions;
   final double incomeSum;
   final double outgoingSum;
   final double netBalance;
 
-  TransactionLoaded(
+  HomeSuccessState(
     this.transactions,
     this.incomeSum,
     this.outgoingSum,
@@ -20,8 +20,8 @@ class TransactionLoaded extends TransactionState {
   );
 }
 
-class TransactionError extends TransactionState {
+class HomeErrorState extends HomeState {
   final String message;
 
-  TransactionError(this.message);
+  HomeErrorState(this.message);
 }
