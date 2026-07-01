@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: locale,
                 builder: (context, child) {
-                  LocalizationService.instance.update(context);
                   return child!;
                 },
                 routerConfig: appRouter,

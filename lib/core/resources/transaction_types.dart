@@ -13,8 +13,8 @@ enum TransactionType {
 extension TransactionTypeExtension on TransactionType {
   String get key => toString().split('.').last;
 
-  String getLocalizedName() {
-    final tr = LocalizationService.instance.tr;
+  String getLocalizedName(BuildContext context) {
+    final tr = LocalizationService.instance.tr(context);
     switch (this) {
       case TransactionType.income:
         return tr.income;

@@ -4,7 +4,7 @@ import '../repos/transactions_repository.dart';
 class GetTransactionsUseCase {
   final TransactionRepository repository;
 
-  GetTransactionsUseCase(this.repository);
+  GetTransactionsUseCase({required this.repository});
 
   Future<List<TransactionEntity>> call() async {
     return await repository.getAllTransactions();

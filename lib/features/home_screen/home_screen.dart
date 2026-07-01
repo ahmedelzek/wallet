@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet/core/app_router/app_router_keys.dart';
 import 'package:wallet/features/add_transaction_screen/add_transaction_screen.dart';
@@ -29,23 +30,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = LocalizationService.instance.tr(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: taps[selectedIndex],
-
         bottomNavigationBar: Container(
-          margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+          margin: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(24),
             child: BottomNavigationBar(
-              selectedLabelStyle: const TextStyle(
-                fontSize: 12,
+              selectedLabelStyle:  TextStyle(
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
               ),
               elevation: 0,
-              unselectedLabelStyle: const TextStyle(
-                fontSize: 12,
+              unselectedLabelStyle:  TextStyle(
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
               ),
               iconSize: 24,
@@ -56,21 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
               type: BottomNavigationBarType.fixed,
               currentIndex: selectedIndex,
               items: generateBottomNavItems({
-                Icons.home: LocalizationService.instance.tr.home,
-                Icons.library_books_sharp:
-                    LocalizationService.instance.tr.transactions,
-                Icons.wallet: LocalizationService.instance.tr.debts,
-                Icons.settings: LocalizationService.instance.tr.settings,
+                Icons.home: tr.home,
+                Icons.library_books_sharp: tr.transactions,
+                Icons.wallet: tr.debts,
+                Icons.settings: tr.settings,
               }),
             ),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.push(AppRouterKeys.addTransaction);
-          },
-          backgroundColor: AppColors.green,
-          child: Icon(Icons.add, color: AppColors.white,size: 32,),
         ),
       ),
     );

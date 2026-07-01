@@ -30,6 +30,7 @@ class _CustomizedTypeDropDownState extends State<CustomizedTypeDropDown> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = LocalizationService.instance.tr(context);
     return Container(
       height: 50.h,
       width: double.infinity,
@@ -40,13 +41,13 @@ class _CustomizedTypeDropDownState extends State<CustomizedTypeDropDown> {
       ),
       child: DropdownButton<TransactionType>(
         isExpanded: true,
-        hint: Text(LocalizationService.instance.tr.selectTransactionType),
+        hint: Text(tr.selectTransactionType),
         value: _selected,
         items: TransactionType.values.map((type) {
           return DropdownMenuItem<TransactionType>(
             value: type,
             child: Text(
-              type.getLocalizedName(),
+              type.getLocalizedName(context),
               style: TextStyle(
                 color: type.color,
                 fontWeight: FontWeight.bold,
@@ -55,8 +56,8 @@ class _CustomizedTypeDropDownState extends State<CustomizedTypeDropDown> {
           );
         }).toList(),
         onChanged: (value) {
-          setState(() => _selected = value); // ← rebuild local
-          widget.onChanged(value);           // ← بعّت للـ Cubit
+          setState(() => _selected = value);
+          widget.onChanged(value);
         },
       ),
     );

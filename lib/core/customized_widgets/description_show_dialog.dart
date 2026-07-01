@@ -3,8 +3,9 @@ import 'package:wallet/l10n/app_translations.dart';
 
 Future<bool?> showDescriptionDialog(BuildContext context,
     String? message) async {
+  final tr = LocalizationService.instance.tr(context);
   final displayMessage = (message == null || message.trim().isEmpty|| message == '')
-      ? LocalizationService.instance.tr.notePrompt // fallback key
+      ? tr.notePrompt
       : message;
   return showDialog<bool>(
     context: context,
@@ -14,7 +15,7 @@ Future<bool?> showDescriptionDialog(BuildContext context,
             borderRadius: BorderRadius.circular(16),
           ),
           title: Text(
-            LocalizationService.instance.tr.noteOrDescription,
+            tr.noteOrDescription,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           ),
           content: Text(displayMessage,

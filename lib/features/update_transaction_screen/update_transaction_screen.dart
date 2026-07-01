@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wallet/core/customized_widgets/app_snack_bar_manager.dart';
 import 'package:wallet/domain/entities/transactions_entities.dart';
 import 'package:wallet/l10n/app_translations.dart';
-
-import '../../core/customized_widgets/customized_text_fields.dart';
-import '../../core/customized_widgets/customized_type_drop_down.dart';
 import '../../core/di/injector.dart';
 import '../../core/resources/app_colors.dart';
 import '../../core/resources/transaction_types.dart';
 import '../../domain/use_cases/update_transaction_usecase.dart';
-import '../home_screen/home_page/cubit/transaction_cubit.dart';
+import '../home_screen/home_page/cubit/home_cubit.dart';
 import 'cubit/update_transaction_cubit.dart';
 import 'cubit/update_transaction_state.dart';
 
@@ -50,29 +48,25 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tr =LocalizationService.instance.tr(context);
     return BlocProvider(
       create: (_) => UpdateTransactionCubit(sl<UpdateTransactionUseCase>()),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.white,
           centerTitle: true,
-          title: Text(
-            LocalizationService.instance.tr.updateTransaction,
+          title: Text(tr.updateTransaction,
             style: TextStyle(color: AppColors.blue),
           ),
         ),
         body: BlocConsumer<UpdateTransactionCubit, UpdateTransactionState>(
           listener: (context, state) {
             if (state is UpdateSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                 SnackBar(content: Text(LocalizationService.instance.tr.updatedSuccess)),
-              );
+              AppSnackBar.showSuccess(context, tr.updatedSuccess);
               context.read<HomeCubit>().loadTransactions();
               Navigator.pop(context);
             } else if (state is UpdateError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Error: ${state.message}')),
-              );
+              AppSnackBar.showError(context, state.message);
             }
           },
           builder: (context, state) {
@@ -98,7 +92,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                           ScaffoldMessenger.of(context).showSnackBar(
                              SnackBar(
                               content: Text(
-                                LocalizationService.instance.tr.addRequiredFields,
+                                tr.addRequiredFields,
                               ),
                             ),
                           );
@@ -127,7 +121,7 @@ class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
                       child: state is UpdateLoading
                           ? const CircularProgressIndicator(color: AppColors.white)
                           : Text(
-                        LocalizationService.instance.tr.saveChanges,
+                        tr.saveChanges,
                         style: const TextStyle(color: AppColors.white),
                       ),
                     ),

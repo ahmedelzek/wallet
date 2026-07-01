@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:wallet/core/customized_widgets/customized_transaction_card.dart';
 import 'package:wallet/core/customized_widgets/description_show_dialog.dart';
@@ -9,8 +10,8 @@ import '../../../core/customized_widgets/customized_slidable_border_radius.dart'
 import '../../../core/di/injector.dart';
 import '../../../l10n/app_translations.dart';
 import '../../update_transaction_screen/update_transaction_screen.dart';
-import 'cubit/transaction_cubit.dart';
-import 'cubit/transaction_state.dart';
+import 'cubit/home_cubit.dart';
+import 'cubit/home_state.dart';
 import 'home_page_widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,20 +19,20 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tr = LocalizationService.instance.tr;
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: BlocProvider(
-        create: (context)=>sl<HomeCubit>()..loadTransactions(),
-        child: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            if (state is HomeLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (state is HomeSuccessState) {
-              final income = state.incomeSum.toStringAsFixed(2);
-              final outgoing = state.outgoingSum.toStringAsFixed(2);
-              final balance = state.netBalance.toStringAsFixed(2);
+    final tr = LocalizationService.instance.tr(context);
+    return BlocProvider(
+      create: (context)=>sl<HomeCubit>()..loadTransactions(),
+        child: Padding(
+          padding:  EdgeInsets.all(20.sp),
+          child: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              final cubit = HomeCubit.get(context);
+              if (state is HomeLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              else if (state is HomeErrorState) {
+                return Center(child: Text(state.message));
+              }
               return Column(
                 children: [
                   Container(
@@ -40,7 +41,7 @@ class HomePage extends StatelessWidget {
                       color: AppColors.darkGreen,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    height: 250,
+                    height: 250.h,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +55,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "$balance EGP",
+                          "${cubit.netBalance} EGP",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -65,15 +66,15 @@ class HomePage extends StatelessWidget {
                         Row(
                           children: [
                             balanceCard(
-                              LocalizationService.instance.tr.income,
-                              income,
+                              tr.income,
+                              cubit.incomeSum.toString(),
                               Icons.arrow_downward,
                               AppColors.green,
                             ),
                             const SizedBox(width: 20),
                             balanceCard(
-                              LocalizationService.instance.tr.outgoing,
-                              outgoing,
+                              tr.outgoing,
+                              cubit.outgoingSum.toString(),
                               Icons.arrow_upward,
                               AppColors.red,
                             ),
@@ -84,14 +85,14 @@ class HomePage extends StatelessWidget {
                           children: [
                             balanceCard(
                               tr.savings,
-                              income,
+                              cubit.incomeSum.toString(),
                               Icons.energy_savings_leaf_sharp,
                               AppColors.blue,
                             ),
                             const SizedBox(width: 20),
                             balanceCard(
                               tr.debtPaid,
-                              outgoing,
+                              cubit.outgoingSum.toString(),
                               Icons.arrow_upward,
                               AppColors.orange,
                             ),
@@ -100,90 +101,84 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 20.h,),
                   Expanded(
                     child:
-                        state.transactions.isEmpty
-                            ? Center(
-                              child: Text(
-                                tr.noTransactionsFound,
-                                style: const TextStyle(
-                                  color: AppColors.green,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                    cubit.transactions.isEmpty
+                        ? Center(
+                      child: Text(
+                        tr.noTransactionsFound,
+                        style: const TextStyle(
+                          color: AppColors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    )
+                        : ListView.separated(
+                      itemCount: cubit.transactions.length,
+                      itemBuilder: (context, index) {
+                        final transaction = cubit.transactions[index];
+                        return Slidable(
+                          startActionPane: ActionPane(
+                            motion: const ScrollMotion(),
+                            extentRatio: .4,
+                            children: [
+                              SlidableAction(
+                                onPressed: (_) {
+                                  context
+                                      .read<HomeCubit>()
+                                      .deleteTransaction(transaction.id);
+                                },
+                                backgroundColor: AppColors.red,
+                                foregroundColor: AppColors.white,
+                                icon: Icons.delete,
+                                borderRadius:
+                                customizedSlidAbleBorderRadius(
+                                  context,
                                 ),
+                                label: tr.delete,
                               ),
-                            )
-                            : ListView.separated(
-                              itemCount: state.transactions.length,
-
-                              itemBuilder: (context, index) {
-                                final transaction = state.transactions[index];
-                                return Slidable(
-                                  startActionPane: ActionPane(
-                                    motion: const ScrollMotion(),
-                                    extentRatio: .4,
-                                    children: [
-                                      SlidableAction(
-                                        onPressed: (_) {
-                                          context
-                                              .read<HomeCubit>()
-                                              .deleteTransaction(transaction.id);
-                                        },
-                                        backgroundColor: AppColors.red,
-                                        foregroundColor: AppColors.white,
-                                        icon: Icons.delete,
-                                        borderRadius:
-                                            customizedSlidAbleBorderRadius(
-                                              context,
-                                            ),
-                                        label: tr.delete,
-                                      ),
-                                      SlidableAction(
-                                        onPressed: (_) {
-                                          Navigator.pushNamed(
-                                            context,
-                                            UpdateTransactionScreen.routeName,
-                                            arguments: transaction,
-                                          );
-                                        },
-                                        backgroundColor: AppColors.blue,
-                                        foregroundColor: AppColors.white,
-                                        icon: Icons.edit,
-                                        label: tr.edit,
-                                      ),
-                                    ],
-                                  ),
-                                  child: InkWell(
-                                    onLongPress: () {
-                                      showDescriptionDialog(
-                                        context,
-                                        transaction.note,
-                                      );
-                                    },
-                                    child: CustomizedTransactionCard(
-                                      transaction: transaction,
-                                    ),
-                                  ),
-                                );
-                              },
-                              separatorBuilder: (
-                                BuildContext context,
-                                int index,
-                              ) {
-                                return const SizedBox(height: 10);
-                              },
+                              SlidableAction(
+                                onPressed: (_) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    UpdateTransactionScreen.routeName,
+                                    arguments: transaction,
+                                  );
+                                },
+                                backgroundColor: AppColors.blue,
+                                foregroundColor: AppColors.white,
+                                icon: Icons.edit,
+                                label: tr.edit,
+                              ),
+                            ],
+                          ),
+                          child: InkWell(
+                            onLongPress: () {
+                              showDescriptionDialog(
+                                context,
+                                transaction.note,
+                              );
+                            },
+                            child: CustomizedTransactionCard(
+                              transaction: transaction,
                             ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (
+                          BuildContext context,
+                          int index,
+                          ) {
+                        return const SizedBox(height: 10);
+                      },
+                    ),
                   ),
                 ],
               );
-            }
-            if (state is HomeErrorState) {
-              return Center(child: Text(state.message));
-            }
-            return const SizedBox();
-          },
-        ),
-      ),
-    );
+            },
+          ),
+        ),);
   }
 }

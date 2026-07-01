@@ -1,10 +1,9 @@
 abstract class DeleteAllState{}
 
-class DeleteLoading extends DeleteAllState{}
+class DeleteInitialState extends DeleteAllState{}
 
-class DeleteSuccess extends DeleteAllState{
+class DeleteLoadingState extends DeleteAllState{}
 
-}
-class DeleteFailure extends DeleteAllState{
+class DeleteSuccessState extends DeleteAllState{}
 
-}
+class DeleteFailureState extends DeleteAllState{}

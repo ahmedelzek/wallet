@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/features/home_screen/settings_page/settings_page.dart';
 import 'package:wallet/features/home_screen/transactions_page/transactions_page.dart';
+import 'package:wallet/features/home_screen/wishlist_page/wishlist_page.dart';
 import '../../core/resources/app_colors.dart';
-import 'debts_page/debts_page.dart';
 import 'home_page/home_page.dart';
 
 List<BottomNavigationBarItem> generateBottomNavItems(
@@ -20,6 +20,6 @@ List<BottomNavigationBarItem> generateBottomNavItems(
 List<Widget> taps = [
   const HomePage(),
   const TransactionsPage(),
-  const DebtsPage(),
+  const WishlistPage(),
   const SettingsPage(),
 ];

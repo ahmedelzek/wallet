@@ -16,6 +16,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = LocalizationService.instance.tr(context);
     final cubit = context.watch<LocaleCubit>();
     final currentLang = cubit.state.languageCode;
 
@@ -26,7 +27,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.lightGrey2,
-        labelText: LocalizationService.instance.tr.language,
+        labelText:tr.language,
       ),
       items:
           languages.entries.map((entry) {

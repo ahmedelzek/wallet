@@ -20,11 +20,12 @@ class _ThemeDropdownState extends State<ThemeDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = LocalizationService.instance.tr(context);
     return DropdownButtonFormField<String>(
       value: _selectedTheme,
       decoration: InputDecoration(
         fillColor: AppColors.lightGrey2,
-        labelText: LocalizationService.instance.tr.theme,
+        labelText: tr.theme,
       ),
       items: _themes.entries.map((entry) {
         return DropdownMenuItem<String>(
