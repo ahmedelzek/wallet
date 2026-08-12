@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wallet/domain/entities/transactions_entities.dart';
 import 'package:wallet/features/add_transaction_screen/add_transaction_screen.dart';
 import 'package:wallet/features/home_screen/home_screen.dart';
 import 'package:wallet/features/update_transaction_screen/update_transaction_screen.dart';
@@ -17,7 +18,11 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRouterKeys.editTransaction,
-      builder: (context, state) => UpdateTransactionScreen(),
+      builder: (context, state) {
+        final transaction = state.extra as TransactionEntity;
+
+        return UpdateTransactionScreen(transaction: transaction,);
+        },
     ),
     GoRoute(
       path: AppRouterKeys.addTransaction,

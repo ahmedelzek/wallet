@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<LocaleCubit, Locale>(
           builder: (context, locale) {
             return ScreenUtilInit(
-              designSize: Size(375, 812),
+              designSize: const Size(375, 812),
+              minTextAdapt: true,
               child: MaterialApp.router(
                 theme: AppTheme.lightTheme,
                 title: 'Wallet',

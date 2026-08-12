@@ -1,0 +1,161 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+abstract class AppMargin {
+  static double get m5 => 5.r;
+  static double get m8 => 8.r;
+  static double get m12 => 12.r;
+  static double get m14 => 14.r;
+  static double get m16 => 16.r;
+  static double get m18 => 18.r;
+  static double get m20 => 20.r;
+}
+
+abstract class AppPadding {
+  static double get p2 => 2.r;
+  static double get p8 => 8.r;
+  static double get p12 => 12.r;
+  static double get p14 => 14.r;
+  static double get p16 => 16.r;
+  static double get p18 => 18.r;
+  static double get p20 => 20.r;
+  static double get p28 => 28.r;
+  static double get p30 => 30.r;
+  static double get p50 => 50.r;
+  static double get p100 => 100.r;
+}
+
+abstract class AppSize {
+  static double get s0 => 0.r;
+  static double get s0_5 => 0.5.r;
+  static double get s1 => 1.r;
+  static double get s1_5 => 1.5.r;
+  static double get s2 => 2.r;
+  static double get s4 => 4.r;
+  static double get s8 => 8.r;
+  static double get s10 => 10.r;
+  static double get s12 => 12.r;
+  static double get s14 => 14.r;
+  static double get s16 => 16.r;
+  static double get s18 => 18.r;
+  static double get s20 => 20.r;
+  static double get s22 => 22.r;
+  static double get s24 => 24.r;
+  static double get s28 => 28.r;
+  static double get s30 => 30.r;
+  static double get s32 => 32.r;
+  static double get s40 => 40.r;
+  static double get s50 => 50.r;
+  static double get s60 => 60.r;
+  static double get s65 => 65.r;
+  static double get s90 => 90.r;
+  static double get s100 => 100.r;
+  static double get s120 => 120.r;
+  static double get s135 => 135.r;
+  static double get s140 => 140.r;
+  static double get s160 => 160.r;
+  static double get s170 => 170.r;
+  static double get s190 => 190.r;
+}
+
+abstract class AppWidth {
+  static double get w0 => 0.w;
+  static double get w0_5 => 0.5.w;
+  static double get w1 => 1.w;
+  static double get w2 => 2.w;
+  static double get w4 => 4.w;
+  static double get w8 => 8.w;
+  static double get w10 => 10.w;
+  static double get w12 => 12.w;
+  static double get w14 => 14.w;
+  static double get w16 => 16.w;
+  static double get w18 => 18.w;
+  static double get w20 => 20.w;
+  static double get w22 => 22.w;
+  static double get w24 => 24.w;
+  static double get w28 => 28.w;
+  static double get w40 => 40.w;
+  static double get w50 => 50.w;
+  static double get w60 => 60.w;
+  static double get w65 => 65.w;
+  static double get w80 => 80.w;
+  static double get w90 => 90.w;
+  static double get w100 => 100.w;
+  static double get w120 => 120.w;
+  static double get w135 => 135.w;
+  static double get w140 => 140.w;
+  static double get w150 => 150.w;
+  static double get w160 => 160.w;
+  static double get w170 => 170.w;
+  static double get w180 => 180.w;
+  static double get w190 => 190.w;
+  static double get w200 => 200.w;
+  static double get w250 => 250.w;
+  static double get w300 => 300.w;
+  static double get w350 => 350.w;
+  static double get w400 => 400.w;
+  static double get w500 => 500.w;
+  static double get w600 => 600.w;
+  static double get w700 => 700.w;
+  static double get w800 => 800.w;
+  static double get w900 => 900.w;
+  static double get w1000 => 1000.w;
+}
+
+abstract class AppHeight {
+  static double get h0 => 0.h;
+  static double get h0_5 => 0.5.h;
+  static double get h1 => 1.h;
+  static double get h2 => 2.h;
+  static double get h4 => 4.h;
+  static double get h8 => 8.h;
+  static double get h10 => 10.h;
+  static double get h12 => 12.h;
+  static double get h14 => 14.h;
+  static double get h16 => 16.h;
+  static double get h18 => 18.h;
+  static double get h20 => 20.h;
+  static double get h22 => 22.h;
+  static double get h24 => 24.h;
+  static double get h28 => 28.h;
+  static double get h30 => 30.h;
+  static double get h35 => 35.h;
+  static double get h40 => 40.h;
+  static double get h45 => 45.h;
+  static double get h50 => 50.h;
+  static double get h55 => 55.h;
+  static double get h60 => 60.h;
+  static double get h65 => 65.h;
+  static double get h70 => 70.h;
+  static double get h75 => 75.h;
+  static double get h80 => 80.h;
+  static double get h85 => 85.h;
+  static double get h90 => 90.h;
+  static double get h95 => 95.h;
+  static double get h100 => 100.h;
+  static double get h110 => 110.h;
+  static double get h120 => 120.h;
+  static double get h130 => 130.h;
+  static double get h135 => 135.h;
+  static double get h140 => 140.h;
+  static double get h150 => 150.h;
+  static double get h160 => 160.h;
+  static double get h170 => 170.h;
+  static double get h180 => 180.h;
+  static double get h190 => 190.h;
+  static double get h200 => 200.h;
+  static double get h220 => 220.h;
+  static double get h250 => 250.h;
+  static double get h280 => 280.h;
+  static double get h300 => 300.h;
+  static double get h320 => 320.h;
+  static double get h350 => 350.h;
+  static double get h400 => 400.h;
+  static double get h450 => 450.h;
+  static double get h500 => 500.h;
+  static double get h550 => 550.h;
+  static double get h600 => 600.h;
+  static double get h650 => 650.h;
+  static double get h700 => 700.h;
+  static double get h750 => 750.h;
+  static double get h800 => 800.h;
+}

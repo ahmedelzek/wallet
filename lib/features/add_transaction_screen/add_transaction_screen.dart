@@ -7,6 +7,7 @@ import 'package:wallet/core/customized_widgets/customized_text_fields.dart';
 import 'package:wallet/core/customized_widgets/customized_type_drop_down.dart';
 import 'package:wallet/core/di/injector.dart';
 import 'package:wallet/core/resources/app_colors.dart';
+import 'package:wallet/core/resources/app_sizes.dart';
 import 'package:wallet/core/validators/validators_helper.dart';
 
 import '../../../l10n/app_translations.dart';
@@ -48,14 +49,14 @@ class AddTransactionScreen extends StatelessWidget {
               ),
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 50,
-                  horizontal: 30,
+                padding: EdgeInsets.symmetric(
+                  vertical: AppPadding.p50,
+                  horizontal: AppPadding.p30,
                 ),
                 child: Form(
                   key: cubit.formKey,
                   child: Column(
-                    spacing: 35,
+                    spacing: AppSize.s32,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       CustomizedTypeDropDown(

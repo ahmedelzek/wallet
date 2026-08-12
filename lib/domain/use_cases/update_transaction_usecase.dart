@@ -6,6 +6,6 @@ class UpdateTransactionUseCase{
   UpdateTransactionUseCase({required this.repository});
 
   Future<void> call(TransactionEntity transaction) async{
-    await repository.addOrUpdateTransaction(transaction);
+    await repository.updateTransaction(transaction);
   }
 }

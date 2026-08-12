@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
+import '../resources/app_sizes.dart';
+
 class ThemeDropdown extends StatefulWidget {
   const ThemeDropdown({super.key});
 
@@ -32,8 +34,8 @@ class _ThemeDropdownState extends State<ThemeDropdown> {
           value: entry.key,
           child: Row(
             children: [
-              Icon(entry.value, size: 20),
-              const SizedBox(width: 8),
+              Icon(entry.value, size: AppSize.s20),
+               SizedBox(width: AppWidth.w8),
               Text(entry.key),
             ],
           ),

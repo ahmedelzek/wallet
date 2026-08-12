@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
+import '../resources/app_sizes.dart';
+
 Future<bool?> showDeleteAllDialog(BuildContext context, String title, String message) async {
   final tr = LocalizationService.instance.tr(context);
   return showDialog<bool>(
@@ -9,7 +11,7 @@ Future<bool?> showDeleteAllDialog(BuildContext context, String title, String mes
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppSize.s16),
         ),
         title:  Text(
           title,

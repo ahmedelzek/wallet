@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/core/resources/app_colors.dart';
+import 'package:wallet/core/resources/app_fonts.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/language_cubit.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
@@ -37,7 +38,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
                 children: [
                   Text(
                     entry.key == 'en' ? '🇺🇸 ' : '🇸🇦 ',
-                    style: const TextStyle(fontSize: 18),
+                    style:  TextStyle(fontSize: FontSize.s18),
                   ),
                   Text(entry.value),
                 ],

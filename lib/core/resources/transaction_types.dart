@@ -6,8 +6,7 @@ enum TransactionType {
   income,
   outgoing,
   savings,
-  debtPending,
-  debtPaid,
+  debts,
 }
 
 extension TransactionTypeExtension on TransactionType {
@@ -22,10 +21,8 @@ extension TransactionTypeExtension on TransactionType {
         return tr.outgoing;
       case TransactionType.savings:
         return tr.savings;
-      case TransactionType.debtPending:
-        return tr.debtPending;
-      case TransactionType.debtPaid:
-        return tr.debtPaid;
+      case TransactionType.debts:
+        return tr.debts;
     }
   }
 
@@ -37,8 +34,7 @@ extension TransactionTypeExtension on TransactionType {
         return AppColors.red;
       case TransactionType.savings:
         return AppColors.blue;
-      case TransactionType.debtPending:
-      case TransactionType.debtPaid:
+      case TransactionType.debts:
         return AppColors.orange;
     }
   }

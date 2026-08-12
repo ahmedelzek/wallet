@@ -1,136 +1,111 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet/core/customized_widgets/app_snack_bar_manager.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wallet/core/customized_widgets/customized_app_snack_bar.dart';
+import 'package:wallet/core/customized_widgets/customized_button.dart';
+import 'package:wallet/core/customized_widgets/customized_text_fields.dart';
+import 'package:wallet/core/customized_widgets/customized_type_drop_down.dart';
+import 'package:wallet/core/di/injector.dart';
+import 'package:wallet/core/resources/app_colors.dart';
+import 'package:wallet/core/resources/app_sizes.dart';
+import 'package:wallet/core/validators/validators_helper.dart';
 import 'package:wallet/domain/entities/transactions_entities.dart';
-import 'package:wallet/l10n/app_translations.dart';
-import '../../core/di/injector.dart';
-import '../../core/resources/app_colors.dart';
-import '../../core/resources/transaction_types.dart';
-import '../../domain/use_cases/update_transaction_usecase.dart';
-import '../home_screen/home_page/cubit/home_cubit.dart';
+import 'package:wallet/features/update_transaction_screen/cubit/update_transaction_state.dart';
+
+import '../../../l10n/app_translations.dart';
 import 'cubit/update_transaction_cubit.dart';
-import 'cubit/update_transaction_state.dart';
 
-class UpdateTransactionScreen extends StatefulWidget {
-  static const String routeName = "update_transaction";
+class UpdateTransactionScreen extends StatelessWidget {
 
-  const UpdateTransactionScreen({super.key});
+     const UpdateTransactionScreen({super.key, required this.transaction});
+     final TransactionEntity transaction;
 
-  @override
-  State<UpdateTransactionScreen> createState() =>
-      _UpdateTransactionScreenState();
-}
-
-class _UpdateTransactionScreenState extends State<UpdateTransactionScreen> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _amountController = TextEditingController();
-  final TextEditingController _noteController = TextEditingController();
-
-  TransactionType? _selectedType;
-
-  //late TransactionEntity transaction;
-  bool _isInitialized = false;
-
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-  }
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _amountController.dispose();
-    _noteController.dispose();
-    super.dispose();
-  }
-
-  @override
+     @override
   Widget build(BuildContext context) {
-    final tr =LocalizationService.instance.tr(context);
+    final tr = LocalizationService.instance.tr(context);
     return BlocProvider(
-      create: (_) => UpdateTransactionCubit(sl<UpdateTransactionUseCase>()),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.white,
-          centerTitle: true,
-          title: Text(tr.updateTransaction,
-            style: TextStyle(color: AppColors.blue),
-          ),
-        ),
-        body: BlocConsumer<UpdateTransactionCubit, UpdateTransactionState>(
-          listener: (context, state) {
-            if (state is UpdateSuccess) {
-              AppSnackBar.showSuccess(context, tr.updatedSuccess);
-              context.read<HomeCubit>().loadTransactions();
-              Navigator.pop(context);
-            } else if (state is UpdateError) {
-              AppSnackBar.showError(context, state.message);
-            }
-          },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
-              child: SingleChildScrollView(
-                child: Column(
-                  spacing: 35,
-                  children: [
-                   /* CustomizedTypeDropDown(_selectedType, (value) {
-                      setState(() {
-                        _selectedType = value;
-                      });
-                    }),*/
-
-                    ElevatedButton(
-                      onPressed: state is UpdateLoading
-                          ? null
-                          : () {
-                        if (_selectedType == null ||
-                            _titleController.text.isEmpty ||
-                            _amountController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                             SnackBar(
-                              content: Text(
-                                tr.addRequiredFields,
-                              ),
-                            ),
-                          );
-                          return;
-                        }
-                        final updatedTransaction = TransactionEntity(
-                          id: 00,
-                          title: _titleController.text,
-                          amount: double.tryParse(_amountController.text) ?? 0.0,
-                          note: _noteController.text.isEmpty
-                              ? null
-                              : _noteController.text,
-                          type: _selectedType!.key,
-                        );
-                        context
-                            .read<UpdateTransactionCubit>()
-                            .updateTransaction(updatedTransaction);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: AppColors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+      create: (_) => sl<UpdateTransactionCubit>()..initialize(transaction),
+      child: BlocConsumer<UpdateTransactionCubit, UpdateTransactionState>(
+        listener: (context, state) {
+          if (state is UpdateSuccess) {
+            AppSnackBar.showSuccess(context, tr.transactionAddedSuccessfully);
+            context.pop();
+          } else if (state is UpdateError) {
+            AppSnackBar.showError(context, tr.failedToUpdateTransaction);
+          }
+        },
+        builder: (context, state) {
+          final cubit = UpdateTransactionCubit.get(context);
+          return SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: AppColors.mintWhite,
+                elevation: 0,
+                title: Text(
+                  tr.updateTransaction,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: AppColors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                centerTitle: true,
+              ),
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  vertical: AppPadding.p50,
+                  horizontal: AppPadding.p30,
+                ),
+                child: Form(
+                  key: cubit.formKey,
+                  child: Column(
+                    spacing: AppSize.s32,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      CustomizedTypeDropDown(
+                        selectedType: cubit.selectedType,
+                        onChanged: (value) {
+                          cubit.selectedType = value;
+                        },
                       ),
-                      child: state is UpdateLoading
-                          ? const CircularProgressIndicator(color: AppColors.white)
-                          : Text(
-                        tr.saveChanges,
-                        style: const TextStyle(color: AppColors.white),
+                      CustomizedTextField(
+                        hintText: tr.enterTitle,
+                        controller: cubit.titleController,
+                        validator: Validators.requiredField,
                       ),
-                    ),
-                  ],
+                      CustomizedTextField(
+                        hintText: tr.enterAmount,
+                        controller: cubit.amountController,
+                        validator: Validators.requiredField,
+                        isNum: true,
+                      ),
+                      CustomizedTextField(
+                        hintText: tr.enterDescriptionOrNote,
+                        controller: cubit.noteController,
+                        validator: Validators.requiredField,
+                        isNote: true,
+                      ),
+                      CustomizedButton(
+                        text: tr.updateTransaction,
+                        color: AppColors.blue,
+                        onTap: () {
+                          if (cubit.selectedType == null) {
+                            AppSnackBar.showError(
+                              context,
+                              tr.selectedTypeRequired,
+                            );
+                            return;
+                          }
+                          cubit.update();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

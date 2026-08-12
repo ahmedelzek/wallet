@@ -11,7 +11,13 @@ class TransactionRepositoryImpl implements TransactionRepository {
   TransactionRepositoryImpl({required this.box});
 
   @override
-  Future<void> addOrUpdateTransaction(TransactionEntity transaction) async {
+  Future<void> addTransaction(TransactionEntity transaction) async {
+    final model = TransactionModel.fromEntity(transaction);
+    await box.put(model.id, model);
+  }
+
+  @override
+  Future<void> updateTransaction(TransactionEntity transaction) async {
     final model = TransactionModel.fromEntity(transaction);
     await box.put(model.id, model);
   }
@@ -49,18 +55,14 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }
 
   @override
+  Future<List<TransactionEntity>> getLastFiveTransactions() async {
+    final lastFiveTransactions = box.values.toList().reversed.take(5);
+    return lastFiveTransactions.map((e)=> e.toEntity()).toList();
+  }
+
+  @override
   Future<List<TransactionEntity>> getTransactionsByType(String type) async {
     final all = box.values.toList();
-
-    if (type.toLowerCase() == 'debts') {
-      final filtered = all.where((tx) {
-        final t = tx.type.toLowerCase();
-        return t == TransactionType.debtPaid.key.toLowerCase() ||
-            t == TransactionType.debtPending.key.toLowerCase();
-      }).toList();
-
-      return filtered.map((e) => e.toEntity()).toList();
-    }
 
     final filtered = all.where((tx) => tx.type.toLowerCase() == type.toLowerCase()).toList();
 
@@ -86,12 +88,8 @@ class TransactionRepositoryImpl implements TransactionRepository {
   Future<double> getSavingsSum() => _getSumOfType(TransactionType.savings.key);
 
   @override
-  Future<double> getDebtPendingSum() =>
-      _getSumOfType(TransactionType.debtPending.key);
-
-  @override
-  Future<double> getDebtPaidSum() =>
-      _getSumOfType(TransactionType.debtPaid.key);
+  Future<double> getDebtsSum() =>
+      _getSumOfType(TransactionType.debts.key);
 
   @override
   Future<double> getNetBalance() async {

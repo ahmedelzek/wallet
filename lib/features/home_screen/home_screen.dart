@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet/core/app_router/app_router_keys.dart';
+import 'package:wallet/core/resources/app_fonts.dart';
+import 'package:wallet/core/resources/app_sizes.dart';
 import 'package:wallet/features/add_transaction_screen/add_transaction_screen.dart';
 
 import '../../core/resources/app_colors.dart';
@@ -36,20 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         body: taps[selectedIndex],
         bottomNavigationBar: Container(
-          margin: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
+          margin: EdgeInsets.symmetric(vertical: AppMargin.m14, horizontal: AppMargin.m14),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(24),
             child: BottomNavigationBar(
               selectedLabelStyle:  TextStyle(
-                fontSize: 12.sp,
+                fontSize: FontSize.s12,
                 fontWeight: FontWeight.w500,
               ),
               elevation: 0,
               unselectedLabelStyle:  TextStyle(
-                fontSize: 12.sp,
+                fontSize: FontSize.s12,
                 fontWeight: FontWeight.w500,
               ),
-              iconSize: 24,
+              iconSize: AppSize.s24,
               backgroundColor: AppColors.green,
               selectedItemColor: AppColors.darkGreen,
               unselectedItemColor: AppColors.white,
@@ -59,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               items: generateBottomNavItems({
                 Icons.home: tr.home,
                 Icons.library_books_sharp: tr.transactions,
-                Icons.wallet: tr.debts,
+                Icons.add_shopping_cart: tr.wishlist,
                 Icons.settings: tr.settings,
               }),
             ),

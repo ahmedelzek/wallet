@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wallet/core/resources/app_fonts.dart';
+import 'package:wallet/core/resources/app_sizes.dart';
 
 import '../../l10n/app_translations.dart';
 import '../resources/app_colors.dart';
@@ -32,12 +33,12 @@ class _CustomizedTypeDropDownState extends State<CustomizedTypeDropDown> {
   Widget build(BuildContext context) {
     final tr = LocalizationService.instance.tr(context);
     return Container(
-      height: 50.h,
+      height: AppHeight.h50,
       width: double.infinity,
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(AppPadding.p12),
       decoration: BoxDecoration(
         color: AppColors.lightGrey,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppPadding.p8),
       ),
       child: DropdownButton<TransactionType>(
         isExpanded: true,
@@ -49,6 +50,7 @@ class _CustomizedTypeDropDownState extends State<CustomizedTypeDropDown> {
             child: Text(
               type.getLocalizedName(context),
               style: TextStyle(
+                fontSize: FontSize.s12,
                 color: type.color,
                 fontWeight: FontWeight.bold,
               ),

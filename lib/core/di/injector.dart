@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wallet/domain/use_cases/get_depts_sum_use_case.dart';
+import 'package:wallet/domain/use_cases/get_last_transactions_usecase.dart';
+import 'package:wallet/domain/use_cases/get_saving_sum_use_case.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/settings_cubit.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_cubit.dart';
 
@@ -48,16 +51,19 @@ Future<void> initDependencies() async {
     () => DeleteTransactionByIdUseCase(repository: sl()),
   );
   sl.registerLazySingleton(() => GetTransactionsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetLastTransactionsUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetNetBalanceUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetIncomeSumUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetOutgoingSumUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetSavingSumUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetDebtsSumUseCase(repository: sl()));
 
   // cubits
-  sl.registerFactory(() => AddTransactionCubit(sl<AddTransactionUseCase>()));
+  sl.registerFactory(() => AddTransactionCubit(sl()));
   sl.registerFactory(
-    () => UpdateTransactionCubit(sl<UpdateTransactionUseCase>()),
+    () => UpdateTransactionCubit(sl()),
   );
   sl.registerFactory(() => SettingsCubit(deleteAllTransactionsUseCase: sl()));
-  sl.registerFactory(() => HomeCubit(sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => HomeCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory(() => TransactionsCubit(getTransactionsUseCase: sl()));
 }

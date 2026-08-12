@@ -21,6 +21,7 @@
   "home": "Home",
   "transactions": "Transactions",
   "debts": "Debts",
+  "wishlist": "Wishlist",
   "statistics": "Statistics",
   "settings": "Settings",
   "theme": "Theme",
@@ -51,5 +52,6 @@
   "failedToDeleteTransactions": "Failed to delete transactions",
   "updateTransaction": "Update Transaction",
   "updatedSuccess": "Transaction Updated Successfully",
-  "failedToUpdateTransaction": "Failed to update transaction"
+  "failedToUpdateTransaction": "Failed to update transaction",
+  "selectedTypeRequired": "selected type is required"
 }

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_cubit.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_state.dart';
 
 import '../../../core/app_router/app_router_keys.dart';
-import '../../../core/customized_widgets/customized_slidable_border_radius.dart';
+import '../../../core/customized_widgets/customized_slidable.dart';
 import '../../../core/customized_widgets/customized_transaction_card.dart';
-import '../../../core/customized_widgets/description_show_dialog.dart';
 import '../../../core/di/injector.dart';
 import '../../../core/resources/app_colors.dart';
+import '../../../core/resources/app_fonts.dart';
+import '../../../core/resources/app_sizes.dart';
 import '../../../l10n/app_translations.dart';
-import '../../update_transaction_screen/update_transaction_screen.dart';
 
 class TransactionsPage extends StatelessWidget {
   const TransactionsPage({super.key});
@@ -33,10 +32,10 @@ class TransactionsPage extends StatelessWidget {
                   cubit.getAllTransactions();
                 },
                 backgroundColor: AppColors.green,
-                child: Icon(Icons.add, color: AppColors.white, size: 32),
+                child: Icon(Icons.add, color: AppColors.white, size: AppSize.s32),
               ),
               body: Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(AppPadding.p20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,67 +49,36 @@ class TransactionsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: AppHeight.h20),
                     Expanded(
                       child:
                           cubit.transactions.isEmpty
                               ? Center(
                                 child: Text(
                                   tr.noTransactionsFound,
-                                  style: const TextStyle(
+                                  style:  TextStyle(
                                     color: AppColors.green,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize: FontSize.s20,
                                   ),
                                 ),
                               )
                               : ListView.separated(
                                 itemCount: cubit.transactions.length,
                                 separatorBuilder:
-                                    (_, __) => const SizedBox(height: 10),
+                                    (_, __) =>  SizedBox(height: AppHeight.h10),
                                 itemBuilder: (context, index) {
                                   final transaction = cubit.transactions[index];
-                                  return Slidable(
-                                    startActionPane: ActionPane(
-                                      motion: const ScrollMotion(),
-                                      extentRatio: .4,
-                                      children: [
-                                        SlidableAction(
-                                          onPressed: (_) {},
-                                          backgroundColor: AppColors.red,
-                                          foregroundColor: AppColors.white,
-                                          icon: Icons.delete,
-                                          borderRadius:
-                                              customizedSlidAbleBorderRadius(
-                                                context,
-                                              ),
-                                          label: tr.delete,
-                                        ),
-                                        SlidableAction(
-                                          onPressed: (_) {
-                                            Navigator.pushNamed(
-                                              context,
-                                              UpdateTransactionScreen.routeName,
-                                              arguments: transaction,
-                                            );
-                                          },
-                                          backgroundColor: AppColors.blue,
-                                          foregroundColor: AppColors.white,
-                                          icon: Icons.edit,
-                                          label: tr.edit,
-                                        ),
-                                      ],
-                                    ),
-                                    child: InkWell(
-                                      onLongPress: () {
-                                        showDescriptionDialog(
-                                          context,
-                                          transaction.note,
-                                        );
-                                      },
-                                      child: CustomizedTransactionCard(
-                                        transaction: transaction,
-                                      ),
+                                  return CustomizedSlidAble(
+                                    secondFunction: () async {
+                                      await context.push(
+                                        AppRouterKeys.editTransaction,
+                                        extra: transaction,
+                                      );
+                                      cubit.getAllTransactions();
+                                    },
+                                    child: CustomizedTransactionCard(
+                                      transaction: transaction,
                                     ),
                                   );
                                 },
