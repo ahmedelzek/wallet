@@ -60,10 +60,15 @@ Future<void> initDependencies() async {
 
   // cubits
   sl.registerFactory(() => AddTransactionCubit(sl()));
-  sl.registerFactory(
-    () => UpdateTransactionCubit(sl()),
-  );
+  sl.registerFactory(() => UpdateTransactionCubit(sl()));
   sl.registerFactory(() => SettingsCubit(deleteAllTransactionsUseCase: sl()));
-  sl.registerFactory(() => HomeCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory(() => TransactionsCubit(getTransactionsUseCase: sl()));
+  sl.registerFactory(
+    () => HomeCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()),
+  );
+  sl.registerFactory(
+    () => TransactionsCubit(
+      getTransactionsUseCase: sl(),
+      searchTransactionUseCase: sl(),
+    ),
+  );
 }

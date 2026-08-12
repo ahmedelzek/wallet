@@ -40,6 +40,9 @@ class TransactionsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextField(
+                      onChanged: (value){
+                        cubit.searchTransaction(value);
+                      },
                       decoration: InputDecoration(
                         hintText: tr.search,
                         hintStyle: const TextStyle(color: AppColors.green),
