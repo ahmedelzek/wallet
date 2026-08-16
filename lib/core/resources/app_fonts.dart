@@ -22,4 +22,5 @@ abstract class FontSize {
   static double get s20 => 20.0.sp;
   static double get s22 => 22.0.sp;
   static double get s24 => 24.0.sp;
+  static double get s32 => 32.0.sp;
 }

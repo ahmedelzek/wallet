@@ -8,12 +8,14 @@ class CustomizedButton extends StatelessWidget {
   final String text;
   final Function()? onTap;
   final Color? color;
+  final double? height;
 
   const CustomizedButton({
     super.key,
     required this.text,
     this.onTap,
     this.color = AppColors.green,
+    this.height,
   });
 
   @override
@@ -21,7 +23,7 @@ class CustomizedButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: AppHeight.h55,
+        height: height ?? AppHeight.h55,
         width: double.infinity,
         decoration: BoxDecoration(
           color: color,

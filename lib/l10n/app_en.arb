@@ -53,5 +53,10 @@
   "updateTransaction": "Update Transaction",
   "updatedSuccess": "Transaction Updated Successfully",
   "failedToUpdateTransaction": "Failed to update transaction",
-  "selectedTypeRequired": "selected type is required"
+  "selectedTypeRequired": "selected type is required",
+  "availableMoney": "Available Money",
+  "wishlistTotal": "Wishlist Total",
+  "amountNeeded": "Amount Needed",
+  "myGoals": "  My Goals",
+  "addNewWish": "Add New Wish"
 }

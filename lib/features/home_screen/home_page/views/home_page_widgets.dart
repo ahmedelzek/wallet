@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/resources/app_colors.dart';
+import '../../../../core/resources/app_colors.dart';
 
 Widget buttonContainer(Color containerColor, Color iconColor, IconData icon) {
   return Container(

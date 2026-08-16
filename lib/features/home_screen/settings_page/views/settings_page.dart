@@ -7,9 +7,9 @@ import 'package:wallet/core/resources/app_sizes.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/settings_cubit.dart';
 import 'package:wallet/l10n/app_translations.dart';
 
-import '../../../core/customized_widgets/customized_app_snack_bar.dart';
-import '../../../core/di/injector.dart';
-import 'cubit/delete_state.dart';
+import '../../../../core/customized_widgets/customized_app_snack_bar.dart';
+import '../../../../core/di/injector.dart';
+import '../cubit/delete_state.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

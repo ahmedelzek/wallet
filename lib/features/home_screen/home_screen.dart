@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:wallet/core/app_router/app_router_keys.dart';
-import 'package:wallet/core/resources/app_fonts.dart';
 import 'package:wallet/core/resources/app_sizes.dart';
-import 'package:wallet/features/add_transaction_screen/add_transaction_screen.dart';
 
 import '../../core/resources/app_colors.dart';
-import '../../features/home_screen/settings_page/cubit/language_cubit.dart';
 import '../../l10n/app_translations.dart';
 import 'home_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String routeName = "home_screen";
-
   const HomeScreen({super.key});
 
   @override
@@ -35,23 +26,18 @@ class _HomeScreenState extends State<HomeScreen> {
     final tr = LocalizationService.instance.tr(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         body: taps[selectedIndex],
         bottomNavigationBar: Container(
           margin: EdgeInsets.symmetric(vertical: AppMargin.m14, horizontal: AppMargin.m14),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(AppSize.s24),
             child: BottomNavigationBar(
-              selectedLabelStyle:  TextStyle(
-                fontSize: FontSize.s12,
-                fontWeight: FontWeight.w500,
-              ),
-              elevation: 0,
-              unselectedLabelStyle:  TextStyle(
-                fontSize: FontSize.s12,
-                fontWeight: FontWeight.w500,
-              ),
-              iconSize: AppSize.s24,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              iconSize: AppSize.s18,
+              selectedFontSize: 0,
+              unselectedFontSize: 0,
               backgroundColor: AppColors.green,
               selectedItemColor: AppColors.darkGreen,
               unselectedItemColor: AppColors.white,
@@ -61,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               items: generateBottomNavItems({
                 Icons.home: tr.home,
                 Icons.library_books_sharp: tr.transactions,
-                Icons.add_shopping_cart: tr.wishlist,
+                Icons.stars_rounded: tr.wishlist,
                 Icons.settings: tr.settings,
               }),
             ),

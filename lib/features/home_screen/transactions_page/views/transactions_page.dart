@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_cubit.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_state.dart';
 
-import '../../../core/app_router/app_router_keys.dart';
-import '../../../core/customized_widgets/customized_slidable.dart';
-import '../../../core/customized_widgets/customized_transaction_card.dart';
-import '../../../core/di/injector.dart';
-import '../../../core/resources/app_colors.dart';
-import '../../../core/resources/app_fonts.dart';
-import '../../../core/resources/app_sizes.dart';
-import '../../../l10n/app_translations.dart';
+import '../../../../core/app_router/app_router_keys.dart';
+import '../../../../core/customized_widgets/customized_slidable.dart';
+import '../../../../core/customized_widgets/customized_transaction_card.dart';
+import '../../../../core/di/injector.dart';
+import '../../../../core/resources/app_colors.dart';
+import '../../../../core/resources/app_fonts.dart';
+import '../../../../core/resources/app_sizes.dart';
+import '../../../../l10n/app_translations.dart';
 
 class TransactionsPage extends StatelessWidget {
   const TransactionsPage({super.key});

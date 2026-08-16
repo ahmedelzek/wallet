@@ -6,12 +6,12 @@ import 'package:wallet/core/customized_widgets/customized_transaction_card.dart'
 import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/core/resources/app_sizes.dart';
 
-import '../../../core/app_router/app_router_keys.dart';
-import '../../../core/di/injector.dart';
-import '../../../core/resources/app_fonts.dart';
-import '../../../l10n/app_translations.dart';
-import 'cubit/home_cubit.dart';
-import 'cubit/home_state.dart';
+import '../../../../core/app_router/app_router_keys.dart';
+import '../../../../core/di/injector.dart';
+import '../../../../core/resources/app_fonts.dart';
+import '../../../../l10n/app_translations.dart';
+import '../cubit/home_cubit.dart';
+import '../cubit/home_state.dart';
 import 'home_page_widgets.dart';
 
 class HomePage extends StatelessWidget {
