@@ -1,12 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wallet/data/models/wishlist/wishlist_model.dart';
 import 'package:wallet/domain/use_cases/get_depts_sum_use_case.dart';
 import 'package:wallet/domain/use_cases/get_last_transactions_usecase.dart';
 import 'package:wallet/domain/use_cases/get_saving_sum_use_case.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/settings_cubit.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_cubit.dart';
 
-import '../../data/models/transactions_model.dart';
+import '../../data/models/transactions/transactions_model.dart';
 import '../../data/repos/transactions_repository_impl.dart';
 import '../../domain/repos/transactions_repository.dart';
 import '../../domain/use_cases/add_transaction_usecase.dart';
@@ -30,6 +31,7 @@ Future<void> initDependencies() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionModelAdapter());
   final transactionBox = await Hive.openBox<TransactionModel>('transactions');
+  final wishlistBox = await Hive.openBox<WishlistModel>('wishlist');
   sl.registerLazySingleton<Box<TransactionModel>>(() => transactionBox);
 
   // repos

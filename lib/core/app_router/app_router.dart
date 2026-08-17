@@ -5,6 +5,7 @@ import 'package:wallet/features/add_transaction_screen/add_transaction_screen.da
 import 'package:wallet/features/home_screen/home_screen.dart';
 import 'package:wallet/features/update_transaction_screen/update_transaction_screen.dart';
 
+import '../../features/add_new_wishlist_screen/views/add_new_wishlist_screen.dart';
 import 'app_router_keys.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -20,13 +21,16 @@ final GoRouter appRouter = GoRouter(
       path: AppRouterKeys.editTransaction,
       builder: (context, state) {
         final transaction = state.extra as TransactionEntity;
-
-        return UpdateTransactionScreen(transaction: transaction,);
-        },
+        return UpdateTransactionScreen(transaction: transaction);
+      },
     ),
     GoRoute(
       path: AppRouterKeys.addTransaction,
       builder: (context, state) => AddTransactionScreen(),
+    ),
+    GoRoute(
+      path: AppRouterKeys.addNewWishlistScreen,
+      builder: (context, state) => AddNewWishlistScreen(),
     ),
   ],
 );

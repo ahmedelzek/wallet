@@ -3,7 +3,7 @@ import 'package:wallet/core/resources/transaction_types.dart';
 
 import '../../domain/entities/transactions_entities.dart';
 import '../../domain/repos/transactions_repository.dart';
-import '../models/transactions_model.dart';
+import '../models/transactions/transactions_model.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
   final Box<TransactionModel> box;

@@ -1,44 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transactions_model.dart';
+part of 'wishlist_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
+class WishlistModelAdapter extends TypeAdapter<WishlistModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  TransactionModel read(BinaryReader reader) {
+  WishlistModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TransactionModel(
+    return WishlistModel(
       id: fields[0] as int,
-      title: fields[1] as String,
-      amount: fields[2] as double,
-      note: fields[3] as String?,
-      type: fields[4] as String,
+      name: fields[1] as String,
+      targetPrice: fields[2] as double,
+      savingsAmount: fields[3] as double,
     );
   }
 
   @override
-  void write(BinaryWriter writer, TransactionModel obj) {
+  void write(BinaryWriter writer, WishlistModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.amount)
+      ..write(obj.targetPrice)
       ..writeByte(3)
-      ..write(obj.note)
-      ..writeByte(4)
-      ..write(obj.type);
+      ..write(obj.savingsAmount);
   }
 
   @override
@@ -47,7 +44,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TransactionModelAdapter &&
+      other is WishlistModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

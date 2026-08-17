@@ -58,5 +58,11 @@
   "wishlistTotal": "Wishlist Total",
   "amountNeeded": "Amount Needed",
   "myGoals": "  My Goals",
-  "addNewWish": "Add New Wish"
+  "addNewWish": "Add New Wish",
+  "itemName": "ITEM NAME",
+  "itemNameHint": "Ex: AirPods, phone",
+  "targetPrice": "Target Price",
+  "initialSavings": "Initial Savings (Optional)",
+  "createWish": "Create Wish",
+  "amountHint": "00"
 }

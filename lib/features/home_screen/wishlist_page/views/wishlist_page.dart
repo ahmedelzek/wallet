@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wallet/core/app_router/app_router_keys.dart';
 import 'package:wallet/core/customized_widgets/customized_button.dart';
 import 'package:wallet/core/resources/app_colors.dart';
 import 'package:wallet/core/resources/app_fonts.dart';
@@ -81,7 +83,14 @@ class WishlistPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppHeight.h10),
-            CustomizedButton(text: tr.addNewWish, color: AppColors.violetBlue, height: AppHeight.h45,),
+            CustomizedButton(
+              text: tr.addNewWish,
+              color: AppColors.violetBlue,
+              height: AppHeight.h45,
+              onTap: (){
+                context.push(AppRouterKeys.addNewWishlistScreen);
+              },
+            ),
           ],
         ),
       ),
