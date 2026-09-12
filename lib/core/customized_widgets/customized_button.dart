@@ -9,6 +9,7 @@ class CustomizedButton extends StatelessWidget {
   final Function()? onTap;
   final Color? color;
   final double? height;
+  final bool isLoading;
 
   const CustomizedButton({
     super.key,
@@ -16,6 +17,7 @@ class CustomizedButton extends StatelessWidget {
     this.onTap,
     this.color = AppColors.green,
     this.height,
+    this.isLoading = false,
   });
 
   @override
@@ -30,14 +32,17 @@ class CustomizedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppPadding.p16),
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: FontSize.s16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child:
+              !isLoading
+                  ? Text(
+                    text,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: FontSize.s16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                  : CircularProgressIndicator(color: AppColors.white),
         ),
       ),
     );

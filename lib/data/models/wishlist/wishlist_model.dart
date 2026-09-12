@@ -3,7 +3,7 @@ import 'package:wallet/domain/entities/wishlist_entities.dart';
 
 part 'wishlist_model.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class WishlistModel extends HiveObject {
   @HiveField(0)
   final int id;
@@ -15,7 +15,7 @@ class WishlistModel extends HiveObject {
   final double targetPrice;
 
   @HiveField(3)
-  final double savingsAmount;
+  final double? savingsAmount;
 
   WishlistModel({
     required this.id,

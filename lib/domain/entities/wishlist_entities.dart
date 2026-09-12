@@ -2,7 +2,7 @@ class WishlistEntity {
   final int id;
   final String name;
   final double targetPrice;
-  final double savingsAmount;
+  final double? savingsAmount;
 
   WishlistEntity({
     required this.id,

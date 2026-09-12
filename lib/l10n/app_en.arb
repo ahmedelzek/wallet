@@ -12,7 +12,7 @@
   "currentBalance": "Current Balance",
   "balanceCurrency": "EGP",
   "income": "Income",
-  "outgoing": "Outgoing",
+  "outgoing": "Expends",
   "savings": "Savings",
   "debtPending": "Debt Pending",
   "debtPaid": "Debt Paid",
@@ -64,5 +64,7 @@
   "targetPrice": "Target Price",
   "initialSavings": "Initial Savings (Optional)",
   "createWish": "Create Wish",
-  "amountHint": "00"
+  "amountHint": "00",
+  "wishlistAddedSuccess": "The New Goal is Added",
+  "wishlistAddedFailed": "Failed to add the goal, please try again"
 }

@@ -1,4 +1,4 @@
-import '../repos/transactions_repository.dart';
+import '../../repos/transactions_repository.dart';
 
 class GetOutgoingSumUseCase {
   final TransactionRepository repository;

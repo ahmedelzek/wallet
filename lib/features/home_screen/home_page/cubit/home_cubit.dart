@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/domain/entities/transactions_entities.dart';
-import 'package:wallet/domain/use_cases/delete_transaction_by_id_usecase.dart';
-import 'package:wallet/domain/use_cases/get_depts_sum_use_case.dart';
-import 'package:wallet/domain/use_cases/get_last_transactions_usecase.dart';
-import 'package:wallet/domain/use_cases/get_saving_sum_use_case.dart';
+import 'package:wallet/domain/use_cases/transactions_use_cases/get_debts_sum_use_case.dart';
 
-import '../../../../domain/use_cases/get_income_sum_usecase.dart';
-import '../../../../domain/use_cases/get_net_balance_usecase.dart';
-import '../../../../domain/use_cases/get_outgoing_sum_usecase.dart';
-import '../../../../domain/use_cases/search_transaction_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/delete_transaction_by_id_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/get_income_sum_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/get_last_transactions_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/get_net_balance_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/get_outgoing_sum_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/get_saving_sum_use_case.dart';
+import '../../../../domain/use_cases/transactions_use_cases/search_transaction_usecase.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {

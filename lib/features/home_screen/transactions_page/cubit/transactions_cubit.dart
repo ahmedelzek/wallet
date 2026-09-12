@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet/domain/use_cases/get_transactions_usecase.dart';
-import 'package:wallet/domain/use_cases/search_transaction_usecase.dart';
 import 'package:wallet/features/home_screen/transactions_page/cubit/transactions_state.dart';
 
 import '../../../../domain/entities/transactions_entities.dart';
+import '../../../../domain/use_cases/transactions_use_cases/get_transactions_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/search_transaction_usecase.dart';
 
 class TransactionsCubit extends Cubit<TransactionsState> {
   static TransactionsCubit get(context) => BlocProvider.of(context);

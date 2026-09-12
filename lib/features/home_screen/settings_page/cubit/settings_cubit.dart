@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/features/home_screen/settings_page/cubit/delete_state.dart';
 
-import '../../../../domain/use_cases/delete_all_trasnactions_usecase.dart';
+import '../../../../domain/use_cases/transactions_use_cases/delete_all_transactions_usecase.dart';
 
 class SettingsCubit extends Cubit<DeleteAllState> {
   static SettingsCubit get(context) => BlocProvider.of(context);

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet/domain/use_cases/update_transaction_usecase.dart';
 import 'package:wallet/features/update_transaction_screen/cubit/update_transaction_state.dart';
 
 import '../../../../domain/entities/transactions_entities.dart';
 import '../../../core/resources/transaction_types.dart';
+import '../../../domain/use_cases/transactions_use_cases/update_transaction_usecase.dart';
 
 class UpdateTransactionCubit extends Cubit<UpdateTransactionState> {
   final UpdateTransactionUseCase updateTransactionUseCase;

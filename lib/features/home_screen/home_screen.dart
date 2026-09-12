@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: BottomNavigationBar(
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              iconSize: AppSize.s18,
+              iconSize: AppSize.s20,
               selectedFontSize: 0,
               unselectedFontSize: 0,
               backgroundColor: AppColors.green,

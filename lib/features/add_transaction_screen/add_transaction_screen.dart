@@ -33,70 +33,68 @@ class AddTransactionScreen extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = AddTransactionCubit.get(context);
-          return SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: AppColors.mintWhite,
-                elevation: 0,
-                title: Text(
-                  tr.addTransaction,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: AppColors.green,
-                    fontWeight: FontWeight.bold,
-                  ),
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: AppColors.mintWhite,
+              elevation: 0,
+              title: Text(
+                tr.addTransaction,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: AppColors.green,
+                  fontWeight: FontWeight.bold,
                 ),
-                centerTitle: true,
               ),
-              backgroundColor: Colors.white,
-              body: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(
-                  vertical: AppPadding.p50,
-                  horizontal: AppPadding.p30,
-                ),
-                child: Form(
-                  key: cubit.formKey,
-                  child: Column(
-                    spacing: AppSize.s32,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      CustomizedTypeDropDown(
-                        selectedType: cubit.selectedType,
-                        onChanged: (value) {
-                          cubit.selectedType = value;
-                        },
-                      ),
-                      CustomizedTextField(
-                        hintText: tr.enterTitle,
-                        controller: cubit.titleController,
-                        validator: Validators.requiredField,
-                      ),
-                      CustomizedTextField(
-                        hintText: tr.enterAmount,
-                        controller: cubit.amountController,
-                        validator: Validators.requiredField,
-                        isNum: true,
-                      ),
-                      CustomizedTextField(
-                        hintText: tr.enterDescriptionOrNote,
-                        controller: cubit.noteController,
-                        validator: Validators.requiredField,
-                        isNote: true,
-                      ),
-                      CustomizedButton(
-                        text: tr.addTransaction,
-                        onTap: () {
-                          if (cubit.selectedType == null) {
-                            AppSnackBar.showError(
-                              context,
-                              "selected type is required",
-                            );
-                            return;
-                          }
-                          cubit.addTransaction();
-                        },
-                      ),
-                    ],
-                  ),
+              centerTitle: true,
+            ),
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                vertical: AppPadding.p50,
+                horizontal: AppPadding.p30,
+              ),
+              child: Form(
+                key: cubit.formKey,
+                child: Column(
+                  spacing: AppSize.s32,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomizedTypeDropDown(
+                      selectedType: cubit.selectedType,
+                      onChanged: (value) {
+                        cubit.selectedType = value;
+                      },
+                    ),
+                    CustomizedTextField(
+                      hintText: tr.enterTitle,
+                      controller: cubit.titleController,
+                      validator: Validators.requiredField,
+                    ),
+                    CustomizedTextField(
+                      hintText: tr.enterAmount,
+                      controller: cubit.amountController,
+                      validator: Validators.requiredField,
+                      isNum: true,
+                    ),
+                    CustomizedTextField(
+                      hintText: tr.enterDescriptionOrNote,
+                      controller: cubit.noteController,
+                      validator: Validators.requiredField,
+                      isNote: true,
+                    ),
+                    CustomizedButton(
+                      text: tr.addTransaction,
+                      onTap: () {
+                        if (cubit.selectedType == null) {
+                          AppSnackBar.showError(
+                            context,
+                            "selected type is required",
+                          );
+                          return;
+                        }
+                        cubit.addTransaction();
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),

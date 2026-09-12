@@ -1,5 +1,5 @@
-import '../entities/transactions_entities.dart';
-import '../repos/transactions_repository.dart';
+import '../../entities/transactions_entities.dart';
+import '../../repos/transactions_repository.dart';
 
 class GetTransactionsUseCase {
   final TransactionRepository repository;

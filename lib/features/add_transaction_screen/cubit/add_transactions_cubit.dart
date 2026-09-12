@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/transactions_entities.dart';
-import '../../../../domain/use_cases/add_transaction_usecase.dart';
 import '../../../core/resources/transaction_types.dart';
+import '../../../domain/use_cases/transactions_use_cases/add_transaction_usecase.dart';
 import 'add_transaction_state.dart';
 
 class AddTransactionCubit extends Cubit<AddTransactionState> {

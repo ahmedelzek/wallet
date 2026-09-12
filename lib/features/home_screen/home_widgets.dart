@@ -15,9 +15,9 @@ List<BottomNavigationBarItem> generateBottomNavItems(
     activeIcon: Center(
       child: Container(
         height: AppHeight.h30,
+        width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: AppHeight.h4),
-        margin: EdgeInsets.symmetric(horizontal: AppWidth.w8),
-        width: null,
+        margin: EdgeInsets.symmetric(horizontal: AppWidth.w4),
         decoration: BoxDecoration(
           color: AppColors.mintWhite,
           borderRadius: BorderRadius.circular(AppSize.s10)
@@ -29,9 +29,9 @@ List<BottomNavigationBarItem> generateBottomNavItems(
               Icon(
                 entry.key,
                 color: AppColors.darkGreen,
-                size: AppSize.s18,
+                size: AppSize.s22,
               ),
-              SizedBox(width: AppWidth.w4),
+              SizedBox(width: AppWidth.w2),
               Flexible(
                 child: Text(
                   entry.value,
